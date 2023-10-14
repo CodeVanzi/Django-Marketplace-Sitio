@@ -1,0 +1,91 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<header class="px-6 py-10 lg:py-20 bg-purple-500">
+    <div class="max-w-3xl mx-auto text-center">
+        <p class="mb-2 text-3xl lg:text-5 text-white font-bold">Marketplace Sitio</p>
+        <p class="mb-8 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.</p>
+        <a href="#" class="px-8 py-3 bg-white text-purple-500 rounded-xl font-bold uppercase text-sm hover:bg-gray-200">Get Started</a>
+    </div>
+</header>
+
+
+<div class="max-w-6xl mx-auto py-6 px-6 xl:px-0">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+
+      {% for product in products %}
+
+      {% include 'product/partials/product_list_item.html'%}
+
+      {% endfor %}
+      <!-- Item 2 -->
+      <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
+        <img src="https://picsum.photos/seed/2/200/200" alt="Product Image" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <p class="text-sm text-gray-600">Category 2</p>
+          <p class="text-lg font-bold text-gray-900">$129</p>
+          <div class="mt-4">
+            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
+        <img src="https://picsum.photos/seed/4/200/200" alt="Product Image" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <p class="text-sm text-gray-600">Category 2</p>
+          <p class="text-lg font-bold text-gray-900">$129</p>
+          <div class="mt-4">
+            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
+        <img src="https://picsum.photos/seed/5/200/200" alt="Product Image" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <p class="text-sm text-gray-600">Category 2</p>
+          <p class="text-lg font-bold text-gray-900">$129</p>
+          <div class="mt-4">
+            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
+        <img src="https://picsum.photos/seed/6/200/200" alt="Product Image" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <p class="text-sm text-gray-600">Category 2</p>
+          <p class="text-lg font-bold text-gray-900">$129</p>
+          <div class="mt-4">
+            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
+        <img src="https://picsum.photos/seed/7/200/200" alt="Product Image" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <p class="text-sm text-gray-600">Category 2</p>
+          <p class="text-lg font-bold text-gray-900">$129</p>
+          <div class="mt-4">
+            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+          </div>
+        </div>
+      </div>
+      <!-- Adicione mais itens conforme necessário -->
+    </div>
+  </div>
+  
+  
+      <!-- Adicione mais itens conforme necessário -->
+    </div>
+  </div>
+  
+{% endblock %}
+
