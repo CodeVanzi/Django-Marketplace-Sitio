@@ -7,6 +7,10 @@ def frontpage(request):
     products = Product.objects.all()[0:8]
     return render(request, 'core/frontpage.html', {'products': products})
 
+
+def signup(request):
+    return render(request, 'core/signup.html')
+
 def shop(request):
     categories = Category.objects.all()
     products = Product.objects.all()

@@ -12,7 +12,13 @@
         {% if product.description %}
             <p class="mt-6 text-gray-700">{{ product.description}} </p>
         {% endif %}
-        <a href="#" class="mt-6 inline-block bg-gray-900 text-white px-3 py-2 rounded-xl bg-purple-500 text-white hover:bg-purple-700">Comprar</a>
+        <a  href="#" 
+            class="mt-6 inline-block bg-gray-900 text-white px-3 py-2 rounded-xl bg-purple-500 text-white hover:bg-purple-700"
+            hx-get="{% url 'add_to_cart' product.id %}"
+            hx-target="#menu-cart-button"
+            hx-swap="outerHTML"
+            >
+            Adicionar ao carrinho</a>
     </div>
 </div>
   
