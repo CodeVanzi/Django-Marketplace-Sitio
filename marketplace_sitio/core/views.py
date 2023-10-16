@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
 from django.db.models import Q
 
 from product.models import Product, Category
+
+from .forms import SignUpform
 
 def frontpage(request):
     products = Product.objects.all()[0:8]
@@ -9,7 +12,17 @@ def frontpage(request):
 
 
 def signup(request):
-    return render(request, 'core/signup.html')
+    if request.method == 'POST':
+        form = SignUpform(request.POST)
+        
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('/')
+    else:
+        form = SignUpform()
+    return render(request, 'core/signup.html', {'form': form})
+
 
 def shop(request):
     categories = Category.objects.all()
