@@ -119,7 +119,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+<<<<<<< Updated upstream
 mktvenv
+=======
+sitiovenv
+>>>>>>> Stashed changes
 
 # Spyder project settings
 .spyderproject

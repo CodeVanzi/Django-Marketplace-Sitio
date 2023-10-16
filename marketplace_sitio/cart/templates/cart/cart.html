@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0">
+
+    <div class="products w-full lg:w-3/4">
+
+        <div class="product mb-6 flex pr-6">
+            <a href="#" class="w-1/4">
+                <img src="https://via.placeholder.com/150" alt="Product Image" class="hover:shadow-lg rounded-xl">
+            </a>
+            <div class="w-3/4 pl-6">
+                <div class="flex justify-between mb-2">
+                    <h2 class="text-lg font-semibold mb-2"><a href="#">Product Name</a></h2>
+                    <p class="text-gray-600 mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                    <span class="text-gray-600">R$ 100,00</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <div>
+
+                    </div>
+                    <div class="quantity mt-6 flex items-center space-x-4">
+                        <label for="quantity" class="mr-2">Quantidade:</label>
+                        <a href="#" class=" font-bold hover:bg-gray-300 text-gray-600 px-3 py-1 rounded-full">-</a>
+                        <span class="text-gray-600 text-lg">1</span>
+                        <a href="#" class=" font-bold hover:bg-gray-300 text-gray-600 px-3 py-1 rounded-full">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product mb-6 flex pr-6">
+            <a href="#" class="w-1/4">
+                <img src="https://via.placeholder.com/150" alt="Product Image" class="hover:shadow-lg rounded-xl">
+            </a>
+            <div class="w-3/4 pl-6">
+                <div class="flex justify-between mb-2">
+                    <h2 class="text-lg font-semibold mb-2"><a href="#">Product Name</a></h2>
+                    <p class="text-gray-600 mb-2">Lorem ipsum dolor sit amet consectetur.</p>
+                    <span class="text-gray-600">R$ 100,00</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <div>
+
+                    </div>
+                    <div class="quantity mt-6 flex items-center space-x-4">
+                        <label for="quantity" class="mr-2">Quantidade:</label>
+                        <a href="#" class=" font-bold hover:bg-gray-300 text-gray-600 px-3 py-1 rounded-full">-</a>
+                        <span class="text-gray-600 text-lg">1</span>
+                        <a href="#" class=" font-bold hover:bg-gray-300 text-gray-600 px-3 py-1 rounded-full">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        
+
+    <div class="summary w-full lg:w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
+        <h2 class="uppercase text-lg mb-5">Resumo</h2>
+        <div class="flex justify-between mb-5">
+            <span class="font-semibold text-gray-600">Subtotal</span>
+            <span class="text-gray-600">R$ {{ cart.get_total_price }}</span>
+        </div>
+        <div class="flex flex-wrap items-center">
+        <a href="{% url 'checkout' %}" class="w-full bg-gray-600 hover:bg-green-800 text-white uppercase py-3 px-5 rounded-full text-center">Finalizar pedido</a>
+        </div>
+    </div>
+
+</div>
+    
+
+{% endblock %}
