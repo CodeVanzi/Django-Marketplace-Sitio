@@ -24,6 +24,10 @@ def signup(request):
     return render(request, 'core/signup.html', {'form': form})
 
 
+def my_account(request):
+    return render(request, 'core/my_account.html')
+
+
 def shop(request):
     categories = Category.objects.all()
     products = Product.objects.all()
