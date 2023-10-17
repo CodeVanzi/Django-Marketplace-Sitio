@@ -1,48 +1,6 @@
 {% extends 'core/base.html' %}
-{% comment %} 
-{% block content %}
 
-<div class="max-w-6xl mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0">
-    
-    <div class="products w-full lg:w-3/4">
-        <h1 class="uppercase text-2xl font-semibold mb-5 mt-3">Confirmar Pedido</h1>
-        <div class="w-full pr-6">
-            <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                <h2 class="uppercase text-lg font-semibold mb-5">Vendedor</h2>
-            </div>
-            <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                <h2 class="uppercase text-lg font-semibold mb-5">Endereço de entrega</h2>
-            </div>
-            <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                <h2 class="uppercase text-lg font-semibold mb-5">Horário de entrega</h2>
-            </div>
-            <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                <h2 class="uppercase text-lg font-semibold mb-5">Informações de contato</h2>
-            </div>
-            <div class="mb-6 p-6 bg-gray-100 rounded-xl">
-                <h2 class="uppercase text-lg font-semibold mb-5">Forma de pagamento</h2>
-            </div>
-        </div>
-
-    </div>
-        
-
-    <div class="summary w-full lg:w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
-        <h2 class="uppercase text-lg font-semibold mb-5">Resumo</h2>
-        <div class="flex justify-between mb-5">
-            <span class="font-semibold text-gray-600">Subtotal</span>
-            <span class="text-gray-600">R$ {{ cart.get_total_price }}</span>
-        </div>
-        <div class="flex flex-wrap items-center">
-        <a href="#" class="w-full bg-gray-600 hover:bg-emerald-800 text-white uppercase py-3 px-5 rounded-full text-center">Confirmar pedido</a>
-        </div>
-    </div>
-
-</div>
-    
-
-{% endblock %} {% endcomment %}
-
+{% block title %}Confirmar pedido {% endblock %}
 
 {% block content %}
 
@@ -90,11 +48,11 @@
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
                 <h2 class="uppercase text-lg font-semibold mb-3">Informações de contato</h2>
                 <label for="cliente_nome" class="font-semibold">Nome do Cliente:</label>
-                <input type="text" id="cliente_nome" name="cliente_nome" value="Cliente Exemplo" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                <input type="text" id="cliente_nome" name="cliente_nome" value="{{ request.user.first_name }} {{ request.user.last_name }}" class="block w-full mb-2 p-2 rounded border border-gray-300">
                 <div class="flex">
                     <div class="w-1/2 pr-2">
                         <label for="cliente_email" class="font-semibold">Email do Cliente:</label>
-                        <input type="text" id="cliente_email" name="cliente_email" value="cliente@example.com" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                        <input type="text" id="cliente_email" name="cliente_email" value="{{ request.user.email }}" class="block w-full mb-2 p-2 rounded border border-gray-300">
                     </div>
                     <div class="w-1/2 pl-2">
                         <label for="cliente_telefone" class="font-semibold">Telefone do Cliente:</label>
@@ -148,7 +106,7 @@
                 <p class="font-semibold">Total</p>
             </div>
             <div class="text-center col-span-3">
-                <p class="font-semibold text-xl">R$ 140.00</p>
+                <p class="font-semibold text-xl">R$ {{ cart.get_total_price }}</p>
             </div>
         </div>
         <div class="flex justify-center mt-4">
