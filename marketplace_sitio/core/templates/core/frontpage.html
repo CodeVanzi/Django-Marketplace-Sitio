@@ -1,13 +1,43 @@
 {% extends 'core/base.html' %}
 
+{% block head %}
+<style>
+  .header-with-background {
+    background: url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1900&q=80') no-repeat center center fixed;
+    width: 100%;
+    height: 33.33vh;
+    background-size: cover;
+    position: relative;
+    z-index: -2;
+  }
+
+  .header-with-background::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.7); /* Cor preta com 70% de transparência */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
+
+{% endblock %}
+
 {% block content %}
-<header class="px-6 py-10 lg:py-20 bg-purple-500">
+<div class="header-with-background">
+  <header class="relative -top-15 left-0 w-full h-1/4 py-10 px-6 lg:py-20">
     <div class="max-w-3xl mx-auto text-center">
-        <p class="mb-2 text-3xl lg:text-5 text-white font-bold">Marketplace Sitio</p>
-        <p class="mb-8 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.</p>
-        <a href="#" class="px-8 py-3 bg-white text-purple-500 rounded-xl font-bold uppercase text-sm hover:bg-gray-200">Get Started</a>
+      <p class="mb-2 text-3xl lg:text-5 text-white font-bold">Sítio Nova Esperança</p>
+      <p class="mb-8 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.</p>
     </div>
-</header>
+  </header>
+</div>
+
+
+
+
 
 
 <div class="max-w-6xl mx-auto py-6 px-6 xl:px-0">
@@ -22,11 +52,11 @@
       <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
         <img src="https://picsum.photos/seed/2/200/200" alt="Product Image" class="w-full h-48 object-cover">
         <div class="p-4">
-          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <a href="#" class="text-lg font-bold text-emerald-500">Product Name 2</a>
           <p class="text-sm text-gray-600">Category 2</p>
           <p class="text-lg font-bold text-gray-900">$129</p>
           <div class="mt-4">
-            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+            <a href="#" class="text-emerald-500 hover:underline">View Details</a>
           </div>
         </div>
       </div>
@@ -34,11 +64,11 @@
       <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
         <img src="https://picsum.photos/seed/4/200/200" alt="Product Image" class="w-full h-48 object-cover">
         <div class="p-4">
-          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <a href="#" class="text-lg font-bold text-emerald-500">Product Name 2</a>
           <p class="text-sm text-gray-600">Category 2</p>
           <p class="text-lg font-bold text-gray-900">$129</p>
           <div class="mt-4">
-            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+            <a href="#" class="text-emerald-500 hover:underline">View Details</a>
           </div>
         </div>
       </div>
@@ -46,11 +76,11 @@
       <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
         <img src="https://picsum.photos/seed/5/200/200" alt="Product Image" class="w-full h-48 object-cover">
         <div class="p-4">
-          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <a href="#" class="text-lg font-bold text-emerald-500">Product Name 2</a>
           <p class="text-sm text-gray-600">Category 2</p>
           <p class="text-lg font-bold text-gray-900">$129</p>
           <div class="mt-4">
-            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+            <a href="#" class="text-emerald-500 hover:underline">View Details</a>
           </div>
         </div>
       </div>
@@ -58,11 +88,11 @@
       <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
         <img src="https://picsum.photos/seed/6/200/200" alt="Product Image" class="w-full h-48 object-cover">
         <div class="p-4">
-          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <a href="#" class="text-lg font-bold text-emerald-500">Product Name 2</a>
           <p class="text-sm text-gray-600">Category 2</p>
           <p class="text-lg font-bold text-gray-900">$129</p>
           <div class="mt-4">
-            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+            <a href="#" class="text-emerald-500 hover:underline">View Details</a>
           </div>
         </div>
       </div>
@@ -70,11 +100,11 @@
       <div class="bg-white rounded-lg overflow-hidden shadow-md transition-transform transform hover:scale-105 hover:shadow-xl">
         <img src="https://picsum.photos/seed/7/200/200" alt="Product Image" class="w-full h-48 object-cover">
         <div class="p-4">
-          <a href="#" class="text-lg font-bold text-purple-500">Product Name 2</a>
+          <a href="#" class="text-lg font-bold text-emerald-500">Product Name 2</a>
           <p class="text-sm text-gray-600">Category 2</p>
           <p class="text-lg font-bold text-gray-900">$129</p>
           <div class="mt-4">
-            <a href="#" class="text-purple-500 hover:underline">View Details</a>
+            <a href="#" class="text-emerald-500 hover:underline">View Details</a>
           </div>
         </div>
       </div>

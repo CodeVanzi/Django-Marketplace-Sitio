@@ -1,8 +1,10 @@
 {% extends 'core/base.html' %}
 
+
+
 {% block content %}
 
-<div class="max-w-6xl mx-auto flex flex-wrap py-6 px-6 xl:px-0">
+<div class="max-w-7xl mx-auto flex flex-wrap py-6 px-6 xl:px-0">
     <div class="images w-full mb-6 lg:mb-0 lg:w-3/5">
         <img src="{% if product.image %}{{ product.image.url }}{% else %}http://via.placeholder.com/800x800{% endif %}" alt="Product Image" class="w-full h-full object-cover rounded-xl">
     </div>
@@ -13,7 +15,7 @@
             <p class="mt-6 text-gray-700">{{ product.description}} </p>
         {% endif %}
         <a  href="#" 
-            class="mt-6 inline-block bg-gray-900 text-white px-3 py-2 rounded-xl bg-purple-500 text-white hover:bg-purple-700"
+            class="mt-6 inline-block bg-gray-900 text-white px-3 py-2 rounded-xl bg-emerald-500 text-white hover:bg-emerald-700"
             hx-get="{% url 'add_to_cart' product.id %}"
             hx-target="#menu-cart-button"
             hx-swap="outerHTML"

@@ -3,12 +3,12 @@
     <div class="p-4">
         
         <div class="flex justify-between mb-2 items-center">
-            <div>
-                <a href="{% url 'product' product.slug %}" class="text-xl font-bold text-purple-500">{{ product.name }}</a>
+            <div class="flex w-3/4 ">
+                <a href="{% url 'product' product.slug %}" class="text-xl font-bold text-emerald-500">{{ product.name }}</a>
             </div>
-            <div class="quantity flex items-center space-x-4">
+            <div class="quantity flex w-1/4 justify-end justify-top space-x-4">
                 <a  href="#"
-                    class="text-purple-500 hover:text-purple-800"
+                    class="text-emerald-500 hover:text-emerald-800"
                     hx-get="{% url 'add_to_cart' product.id %}"
                     hx-target="#menu-cart-button"
                     hx-swap="outerHTML"
@@ -20,7 +20,7 @@
         <p class="text-lg text-gray-600">{{ product.category }}</p>
         <p class="text-lg font-bold text-gray-900">R$ {{ product.price }}</p>
         <div class="mt-4">
-            <a href="{% url 'product' product.slug %}" class="text-purple-500 hover:underline">{{ product.description }}</a>
+            <a href="{% url 'product' product.slug %}" class="text-emerald-500 hover:underline">{{ product.description }}</a>
         </div>
     </div>
 </div>

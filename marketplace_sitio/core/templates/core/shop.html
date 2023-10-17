@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="max-w-6xl mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0">
-    <div class="filters w-full lg:w-1/4">
+<div class="max-w-7xl mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0">
+    <div class="filters w-full lg:w-1/5">
      <!-- Sidebar content -->
 
         <h3 class="mb-3 text-xl uppercase font-bold text-gray-900">Buscar</h3>
@@ -23,9 +23,9 @@
         
         <h3 class="my-6 text-xl uppercase font-bold text-gray-900">Categorias</h3>
         <ul class="space-y-2">
-            <li><a href="{% url 'shop'%}" class="block p-2 {% if not active_category%}text-purple-600 text-xl {% else %} text-gray-600 {% endif %} hover:bg-purple-500 hover:text-white transition duration-300">Todos</a></li>
+            <li><a href="{% url 'shop'%}" class="block p-2 {% if not active_category%}text-emerald-600 text-xl {% else %} text-gray-600 {% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">Todos</a></li>
             {% for category in categories %}
-            <li><a href="{% url 'shop'%}?category={{ category.slug }}" class="block p-2 {% if category.slug == active_category%}text-purple-600 text-xl{% else %} text-gray-600 {% endif %} hover:bg-purple-500 hover:text-white transition duration-300">{{category.name}}</a></li>
+            <li><a href="{% url 'shop'%}?category={{ category.slug }}" class="block p-2 {% if category.slug == active_category%}text-emerald-600 text-xl{% else %} text-gray-600 {% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">{{category.name}}</a></li>
             {% endfor %}
 
         </ul>
@@ -33,7 +33,7 @@
 
     <!-- Products content -->
 
-    <div class="products p-6 w-full lg:w-3/4 -mt-4">
+    <div class="products p-6 w-full lg:w-4/5 -mt-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
 
             {% for product in products %}
