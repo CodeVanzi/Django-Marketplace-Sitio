@@ -4,10 +4,66 @@
 
 {% block content %}
 
-    <div class="max-w-lg mx-auto p-6 text-center">
-        <h1 class="text-2xl font-semibold text-gray-700">Minha conta</h1>
-        <p class="text-gray-600">Aqui você pode ver e editar suas informações pessoais.</p>
+    <div class="max-w-7xl mx-auto p-6 ">
+
+        <h1 class="text-xl font-semibold uppercase text-gray-700">Minha conta</h1>
+
+
+        <div class="text-gray-700 mb-6">
+            <br><br>
+            <strong>Nome:</strong> {{ request.user.get_full_name }}<br>
+            <strong>Nome de Usuário:</strong> {{ request.user.username }}<br>
+            <strong>E-mail</strong> {{ request.user.email }}<br>
+            <a href="{% url 'editmyaccount' %}" class="mt-6 inline-block bg-gray-900 text-white px-3 py-2 rounded-xl bg-emerald-500 text-white hover:bg-emerald-700">Editar dados</a>
+            
+        </div>
+
+        <hr>
+
+        <h2 class="my-6 uppercase text-xl">Meus pedidos</h2>
+
+        <div class="orders w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
+            <div class="mb-6 flex justify-between w-full">
+                <a href="#">Pedido id: 1</a>
+            </div>
+        
+            <div class="mb-6 w-full">
+                <div class="product mb-6 flex pr-6 w-full">
+                    <div class="w-1/8 ">
+                        <a href="#" alt="nome produto" class="" >
+                            <img class="h-12 w-12 object-cover hover:shadow-lg rounded-xl" src="https://via.placeholder.com/150" >
+                        </a>
+                    </div>
+        
+                    <div class="w-7/8 pl-6 w-full">
+                        <div class="flex justify-between">
+                            <a href="#" class="font-semibold ">Nome do produto</a>
+                            <p class="mb-6 pt-1 text-gray-600">R$ 100,00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-2 w-full">
+                <strong>Total:</strong> <span class="text-gray-600">R$ 100,00</span>
+                <br>
+                <strong>Situação do pedido:</strong> <span class="text-emerald-600">Aprovado</span>
+                <br>
+                <strong>Data do pedido:</strong> <span class="text-gray-600">01/01/2021</span>
+                <br>
+                <strong>Forma de pagamento:</strong> <span class="text-gray-600">Cartão de crédito</span>
+                <br>
+                <strong>Endereço de entrega:</strong> <span class="text-gray-600">Rua tal, 123, Bairro tal, Cidade tal, Estado tal</span>
+                <br>
+                <strong>Situação da entrega:</strong> <span class="text-gray-600">12345-678</span>
+                
+            </div>
+        </div>
+        
+
+
+
     </div>
 
-    
+
 {% endblock %}

@@ -22,12 +22,12 @@
                     </ul>
                 </div>
                 <div class="menu-right flex items-center space-x-6">
-                    {% if not user.is_authenticated %}
-                    <a href="{% url 'login' %}" class="py-4 text-lg font-semibold text-gray-500 hover:text-emerald-800">
+                    {% comment %} {% if not user.is_authenticated %} {% endcomment %}
+                    <a href="{% url 'myaccount' %}" class="py-4 text-lg font-semibold text-gray-500 hover:text-emerald-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg></a>
-                    {% endif %}
+                    {% comment %} {% endif %} {% endcomment %}
                     {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}" class="py-4 text-lg font-semibold text-gray-500 hover:text-emerald-800">Logout</a>
                     {% endif %}
@@ -49,17 +49,18 @@
         <footer class="bg-gray-100">
             <div class="max-w-7xl mx-auto py-10 px-6 xl:px-0 md:flex justify-between">
                 <div class="footer-left mb-12 md:mb-0">
-                    <h2 class="mb-5 uppercase text-lg ">About Us</h2>
-                    <a href="#" class="text-xl font-bold text-gray-500 hover:text-gray-400">Brand</a>
-                    <p class="py-2 text-gray-500 sm:py-0">All rights reserved</p>
+                    <h2 class="mb-5 uppercase text-lg ">Sobre nós</h2>
+                    <a href="#" class="text-xl font-bold text-gray-500 hover:text-gray-400">Sitio Nova Esperança</a>
+                    <p class="py-2 text-gray-500 sm:py-0">@2023 todos os direitos reservados</p>
+                    <br>
+                    <p class="py-2 text-lg font-semibold text-gray-500 sm:py-0">Desenvolvido por: </p>
+                    <p class="py-2 text-gray-500 sm:py-0">Alunos UNIVESP PI2-S4G15-2023</p>
                 </div>
                 <div class="footer-right mb-12 md:mb-0">
-                    <h2 class="mb-5 uppercase text-lg ">Social</h2>
+                    <h2 class="mb-5 uppercase text-lg ">Entre em contato</h2>
                     <a href="#" class="text-xl font-bold text-gray-500 hover:text-gray-400">Email</a>
                     <p class="py-2 text-gray-500 sm:py-0"> 
-                    <a href="https://www.facebook.com/"><img src="https://img.icons8.com/fluent/48/000000/facebook-new.png"/></a>
-                    <a href="https://www.instagram.com/"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
-                    <a href="https://www.youtube.com/"><img src="https://img.icons8.com/fluent/48/000000/youtube-play.png"/></a>
+
                     </p>
             </div>
         </footer>

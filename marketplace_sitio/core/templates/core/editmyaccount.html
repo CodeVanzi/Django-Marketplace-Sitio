@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Editar conta {% endblock %}
+
+{% block content %}
+
+    <div class="max-w-lg mx-auto p-6 ">
+
+        <h1 class="text-xl font-semibold uppercase text-gray-700">Editar minha conta</h1>
+        <br>
+        <p class="text-gray-600">Aqui você pode editar suas informações pessoais.</p>
+        <br>
+        <form method="post" action="." class="space-y-3">
+            {% csrf_token %}
+            <div>
+                <label>Nome de Usuário</label>
+                <input type="text" name="username" value="{{ request.user.username }}" class="w-full mt-2 border border-gray-300 p-2 rounded-lg" placeholder="Nome de Usuário">
+            </div>
+            <div>
+                <label>Nome</label>
+                <input type="text" name="first_name" value="{{ request.user.first_name }}" class="w-full mt-2 border border-gray-300 p-2 rounded-lg" placeholder="Nome">
+            </div>
+            <div>
+                <label>Sobrenome</label>
+                <input type="text" name="last_name" value="{{ request.user.last_name }}" class="w-full mt-2 border border-gray-300 p-2 rounded-lg" placeholder="Sobrenome">
+            </div>
+            <div>
+                <label>E-mail</label>
+                <input type="email" name="email" value="{{ request.user.email }}" class="w-full mt-2 border border-gray-300 p-2 rounded-lg" placeholder="E-mail">
+            </div>
+
+            <div class="flex justify-center">
+                <button type="submit" class="w-24 bg-emerald-500 hover:bg-emerald-800 text-white font-semibold p-3 rounded-lg">Salvar</button>
+            </div>
+
+        </form>
+
+    </div>
+{% endblock %}
