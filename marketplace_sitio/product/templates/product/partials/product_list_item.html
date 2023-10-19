@@ -9,7 +9,7 @@
             <div class="quantity flex w-1/4 justify-end justify-top space-x-4">
                 <a  href="#"
                     class="text-emerald-500 hover:text-emerald-800"
-                    hx-get="{% url 'update_cart' product.id 'increment' %}"
+                    hx-get="{% url 'update_menu_cart' product.id 'increment' %}"
                     hx-target="#menu-cart-button"
                     hx-swap="outerHTML"
                 >

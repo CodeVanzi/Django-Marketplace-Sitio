@@ -16,7 +16,7 @@
         {% endif %}
         <a  href="#" 
             class="mt-6 inline-block bg-gray-900 text-white px-3 py-2 rounded-xl bg-emerald-500 text-white hover:bg-emerald-700"
-            hx-get="{% url 'update_cart' product.id 'increment' %}"
+            hx-get="{% url 'update_menu_cart' product.id 'increment' %}"
             hx-target="#menu-cart-button"
             hx-swap="outerHTML"
             >

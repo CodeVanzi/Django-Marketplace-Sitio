@@ -94,6 +94,13 @@ class Cart(object):
     def get_total_quantity(self):
         return sum(item['quantity'] for item in self.cart.values())
     
+    def get_item(self, product_id):
+        product_id = str(product_id)
+        if product_id in self.cart:
+            return self.cart[str(product_id)]
+        else:
+            return None
+    
     """"
     Lembrete: se o código não funcionar, rever a parte 7 e revisar o código. lembrar também que a princípio era esperado receber um valor de preço como centavos, e não um valor decimal. talvez seja necessário revisar o código para trabalhar com centavos.
     """
