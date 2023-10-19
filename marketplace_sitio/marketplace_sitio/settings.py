@@ -32,8 +32,11 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
 SESSION_COOKIE_AGE = 86400
-
 CART_SESSION_ID = 'cart'
+
+STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51O2wxSI4YPElTw2pdTqh7KNTlYmoZquQqchlL70VOiCWxrS9tFufdoSAqokb5XAcuNp7AMHcdEJiHV7dsTkvuErc00ut0KWQTK'
+STRIPE_API_KEY_HIDDEN = 'sk_test_51O2wxSI4YPElTw2p9PChxE7ap4SUkXBYmzE2qsHZMfeSx5yxFqBO0BYAXU9B72VTQJ6k8AEAPHNMU3xv2Yr9vnEE00Heus3xsk'
+
 
 # Application definition
 
@@ -44,9 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cart',
     'core',
     'product',
-    'cart',
+    'order',
 ]
 
 MIDDLEWARE = [

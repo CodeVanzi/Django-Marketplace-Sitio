@@ -22,46 +22,47 @@
 
         <h2 class="my-6 uppercase text-xl">Meus pedidos</h2>
 
-        <div class="orders w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
-            <div class="mb-6 flex justify-between w-full">
-                <a href="#">Pedido id: 1</a>
-            </div>
-        
-            <div class="mb-6 w-full">
-                <div class="product mb-6 flex pr-6 w-full">
-                    <div class="w-1/8 ">
-                        <a href="#" alt="nome produto" class="" >
-                            <img class="h-12 w-12 object-cover hover:shadow-lg rounded-xl" src="https://via.placeholder.com/150" >
-                        </a>
-                    </div>
-        
-                    <div class="w-7/8 pl-6 w-full">
-                        <div class="flex justify-between">
-                            <a href="#" class="font-semibold ">Nome do produto</a>
-                            <p class="mb-6 pt-1 text-gray-600">R$ 100,00</p>
+        {% comment %} {% for order in request.user.orders.all %} {% endcomment %}
+            <div class="order w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
+                <div class="mb-6 flex justify-between w-full">
+                    <a href="#">Pedido id: 1</a>
+                </div>
+            
+                <div class="mb-6 w-full">
+                    {% comment %} {% for item in order.items.all %} {% endcomment %}
+                        <div class="product mb-6 flex pr-6 w-full">
+                            <div class="w-1/8 ">
+                                <a href="#" alt="{{ order.item.name }}" class="" >
+                                    <img class="h-12 w-12 object-cover hover:shadow-lg rounded-xl" src="https://via.placeholder.com/150" >
+                                </a>
+                            </div>
+                
+                            <div class="w-7/8 pl-6 w-full">
+                                <div class="flex justify-between">
+                                    <a href="#" class="font-semibold ">{{ order.item.name }}</a>
+                                    <p class="mb-6 pt-1 text-gray-600">R$ {{ order.item.price }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    {% comment %} {% endfor %} {% endcomment %}
+                </div>
+
+                <div class="mb-2 w-full">
+                    <strong>Total:</strong> <span class="text-gray-600">R$ 100,00</span>
+                    <br>
+                    <strong>Situação do pedido:</strong> <span class="text-emerald-600">Aprovado</span>
+                    <br>
+                    <strong>Data do pedido:</strong> <span class="text-gray-600">{{ order.created_at }}</span>
+                    <br>
+                    <strong>Forma de pagamento:</strong> <span class="text-gray-600">Cartão de crédito</span>
+                    <br>
+                    <strong>Endereço de entrega:</strong> <span class="text-gray-600">Rua tal, 123, Bairro tal, Cidade tal, Estado tal</span>
+                    <br>
+                    <strong>Situação da entrega:</strong> <span class="text-gray-600">12345-678</span>
+                    
                 </div>
             </div>
-
-            <div class="mb-2 w-full">
-                <strong>Total:</strong> <span class="text-gray-600">R$ 100,00</span>
-                <br>
-                <strong>Situação do pedido:</strong> <span class="text-emerald-600">Aprovado</span>
-                <br>
-                <strong>Data do pedido:</strong> <span class="text-gray-600">01/01/2021</span>
-                <br>
-                <strong>Forma de pagamento:</strong> <span class="text-gray-600">Cartão de crédito</span>
-                <br>
-                <strong>Endereço de entrega:</strong> <span class="text-gray-600">Rua tal, 123, Bairro tal, Cidade tal, Estado tal</span>
-                <br>
-                <strong>Situação da entrega:</strong> <span class="text-gray-600">12345-678</span>
-                
-            </div>
-        </div>
-        
-
-
+        {% comment %} {% endfor %} {% endcomment %}
 
     </div>
 

@@ -38,6 +38,11 @@
                     <p class="mt-4">Já tem uma conta? <a href="#" class="text-blue-500 hover:text-blue-700">Faça login</a></p>
                     <p class="mt-4 text-gray-500">Ao se cadastrar você concorda com os <a href="#" class="text-blue-500 hover:text-blue-700">Termos de uso</a> e a <a href="#" class="text-blue-500 hover:text-blue-700">Política de privacidade</a> do site.</p>
                 </div>
+
+                {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+                
                 </form>
         </div>
     

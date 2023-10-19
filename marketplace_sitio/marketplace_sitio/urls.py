@@ -9,6 +9,7 @@ from django.urls import include, path
 urlpatterns = [
     path('', include('core.urls')),
     path('cart/', include('cart.urls')),
+    path('order/', include('order.urls')),
     path('admin/', admin.site.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
