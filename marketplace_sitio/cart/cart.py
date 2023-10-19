@@ -54,6 +54,23 @@ class Cart(object):
         if self.cart[product_id]['quantity'] == 0:
             self.remove(product)
         self.save()
+        
+    # def add(self, product, quantity=1, update_quantity=False):
+    #     """
+    #     Add a product to the cart or update its quantity.
+    #     """
+    #     product_id = str(product.id)
+    #     if product_id not in self.cart:
+    #         self.cart[product_id] = {'quantity': 0,
+    #                                  'price': str(product.price),
+    #                                  'id': product_id}
+    #     if update_quantity:
+    #         self.cart[product_id]['quantity'] += int(quantity)
+    #         if self.cart[product_id]['quantity'] == 0:
+    #             self.remove(product)
+    #     if self.cart[product_id]['quantity'] == 0:
+    #         self.remove(product)
+    #     self.save()
 
 
         
