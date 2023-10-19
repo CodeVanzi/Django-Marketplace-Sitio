@@ -51,27 +51,9 @@ class Cart(object):
             self.cart[product_id]['quantity'] += int(quantity)
             if self.cart[product_id]['quantity'] == 0:
                 self.remove(product_id)
-        if self.cart[product_id]['quantity'] == 0:
-            self.remove(product)
+        if product_id not in self.cart:
+            print('não está no carrinho')
         self.save()
-        
-    # def add(self, product, quantity=1, update_quantity=False):
-    #     """
-    #     Add a product to the cart or update its quantity.
-    #     """
-    #     product_id = str(product.id)
-    #     if product_id not in self.cart:
-    #         self.cart[product_id] = {'quantity': 0,
-    #                                  'price': str(product.price),
-    #                                  'id': product_id}
-    #     if update_quantity:
-    #         self.cart[product_id]['quantity'] += int(quantity)
-    #         if self.cart[product_id]['quantity'] == 0:
-    #             self.remove(product)
-    #     if self.cart[product_id]['quantity'] == 0:
-    #         self.remove(product)
-    #     self.save()
-
 
         
     def remove(self, product_id):
@@ -96,11 +78,6 @@ class Cart(object):
             return self.cart[str(product_id)]
         else:
             return None
-    
-    """"
-    Lembrete: se o código não funcionar, rever a parte 7 e revisar o código. lembrar também que a princípio era esperado receber um valor de preço como centavos, e não um valor decimal. talvez seja necessário revisar o código para trabalhar com centavos.
-    """
-    
 
     
     

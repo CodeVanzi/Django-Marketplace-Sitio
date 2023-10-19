@@ -1,0 +1,6 @@
+
+        <span class="text-gray-600" 
+        id="cart_total"
+        hx-get="{% url 'hx_cart_total' %}"
+        hx-trigger="update-menu-cart from:body"
+        hx-swap="innerHTML">R$ {{ cart.get_total_price }}</span>

@@ -30,7 +30,7 @@ def update_menu_cart(request, product_id, action):
 def update_cart(request, product_id, action):
     cart = Cart(request)
     product = Product.objects.get(id=product_id)
-    quantity = cart.get_item(product_id)
+    
   
     if action == 'increment':
         cart.add(product=product, quantity=1, update_quantity=True)
@@ -40,6 +40,8 @@ def update_cart(request, product_id, action):
         cart.remove(product=product)
     elif action == 'clear':
         cart.clear()
+    
+    quantity = cart.get_item(product_id)
             
     if quantity:
         quantity = quantity['quantity']
@@ -62,41 +64,10 @@ def update_cart(request, product_id, action):
     
     return response
 
-# def update_cart(request, product_id, action):
-#     cart = Cart(request)
-#     product = Product.objects.get(id=product_id)
-#     cart.add(product=product, quantity=1, update_quantity=True)
-#     # cart.remove(product=product)
-#     # cart.clear()
-#     return render(request, 'cart/partials/menu_cart.html', {'cart': cart})
 
 def cart(request):
     cart = Cart(request)
     return render(request, 'cart/cart.html', {'cart': cart})
-
-# def cart_item(request, product_id):
-#     cart = Cart(request)
-#     product = Product.objects.get(pk=product_id)
-#     quantity = cart.get_item(product_id)
-#     if quantity:
-#         quantity = quantity['quantity']
-
-#         item = {
-#             'product': {
-#                 'id': product.id,
-#                 'name': product.name,
-#                 'image': product.image,
-#                 'description': product.description,
-#                 'get_thumbnail': product.get_thumbnail(),
-#                 'price': product.price,
-#             },
-#             'total_price': quantity * product.price,
-#             'quantity': quantity,
-#         }
-#     else:
-#         item = None
-    
-#     return render(request, 'cart/partials/cart_item.html', {'item': item})
 
 @login_required
 def checkout(request):
@@ -105,3 +76,7 @@ def checkout(request):
 def hx_menu_cart(request):
     cart = Cart(request)
     return render(request, 'cart/partials/menu_cart.html', {'cart': cart})
+
+def hx_cart_total(request):
+    cart = Cart(request)
+    return render(request, 'cart/partials/cart_total.html', {'cart': cart})
