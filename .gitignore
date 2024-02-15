@@ -112,6 +112,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.Djangovenv
 .env
 .venv
 env/
@@ -120,11 +121,8 @@ ENV/
 djangovenv/
 env.bak/
 venv.bak/
-<<<<<<< Updated upstream
 mktvenv
-=======
 sitiovenv
->>>>>>> Stashed changes
 
 # Spyder project settings
 .spyderproject

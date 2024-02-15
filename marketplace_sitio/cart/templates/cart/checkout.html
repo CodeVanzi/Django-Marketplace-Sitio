@@ -1,120 +1,218 @@
-{% extends 'core/base.html' %}
-
-{% block title %}Confirmar pedido {% endblock %}
-
+{% extends 'core/base.html' %} {% block title %}Confirmar pedido {% endblock %}
 {% block content %}
 
 <div class="max-w-screen-xl mx-auto p-4 xl:p-0 flex items-start py-6">
-     {% comment %} <form id="confirmacao_pedido_form" method="post" action="{% url 'start_order' %}" hx-post="{% url 'start_order' %}" hx-trigger="submit">  {% endcomment %}
+    <form
+        id="confirmacao_pedido_form"
+        method="post"
+        action="{% url 'start_order' %}"
+        hx-post="{% url 'start_order' %}"
+        hx-trigger="submit"
+        class="w-full lg:w-7/12 pr-4"
+    >
         {% csrf_token %}
         <div class="w-full lg:w-7/12 pr-4">
-            <h1 class="uppercase text-2xl font-semibold mb-5 mt-3">Confirmar Pedido</h1>
-            
+            <h1 class="uppercase text-2xl font-semibold mb-5 mt-3">
+                Confirmar Pedido
+            </h1>
+
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
                 <h2 class="uppercase text-lg font-semibold mb-3">Vendedor</h2>
-                <label for="vendedor_nome" class="font-semibold">Nome do Vendedor:</label>
-                <input type="text" id="vendedor_nome" name="vendedor_nome" value="Nome do Vendedor Exemplo" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                <label for="vendedor_nome" class="font-semibold"
+                    >Nome do Vendedor:</label
+                >
+                <input
+                    type="text"
+                    id="vendedor_nome"
+                    name="vendedor_nome"
+                    value="Nome do Vendedor Exemplo"
+                    class="block w-full mb-2 p-2 rounded border border-gray-300"
+                />
                 <div class="flex">
                     <div class="w-1/2 pr-2">
-                        <label for="vendedor_email" class="font-semibold">Email do Vendedor:</label>
-                        <input type="text" id="vendedor_email" name="vendedor_email" value="vendedor@example.com" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                        <label for="vendedor_email" class="font-semibold"
+                            >Email do Vendedor:</label
+                        >
+                        <input
+                            type="text"
+                            id="vendedor_email"
+                            name="vendedor_email"
+                            value="vendedor@example.com"
+                            class="block w-full mb-2 p-2 rounded border border-gray-300"
+                        />
                     </div>
                     <div class="w-1/2 pl-2">
-                        <label for="telefone_vendedor" class="font-semibold">Telefone do Vendedor:</label>
-                        <input type="text" id="telefone_vendedor" name="telefone_vendedor" value="(11) 98765-4321" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                        <label for="telefone_vendedor" class="font-semibold"
+                            >Telefone do Vendedor:</label
+                        >
+                        <input
+                            type="text"
+                            id="telefone_vendedor"
+                            name="telefone_vendedor"
+                            value="(11) 98765-4321"
+                            class="block w-full mb-2 p-2 rounded border border-gray-300"
+                        />
                     </div>
                 </div>
-                
-                
             </div>
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
-                <h2 class="uppercase text-lg font-semibold mb-3">Endereço de entrega</h2>
-                <label for="endereco_entrega" class="font-semibold">Endereço:</label>
-                <input type="text" id="endereco_entrega" name="endereco_entrega" value="Rua Exemplo, 123" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                <h2 class="uppercase text-lg font-semibold mb-3">
+                    Endereço de entrega
+                </h2>
+                <label for="endereco_entrega" class="font-semibold"
+                    >Endereço:</label
+                >
+                <input
+                    type="text"
+                    id="endereco_entrega"
+                    name="endereco_entrega"
+                    value="Rua Exemplo, 123"
+                    class="block w-full mb-2 p-2 rounded border border-gray-300"
+                />
             </div>
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
-                <h2 class="uppercase text-lg font-semibold mb-3">Horário de entrega</h2>
+                <h2 class="uppercase text-lg font-semibold mb-3">
+                    Horário de entrega
+                </h2>
                 <div class="flex">
                     <div class="w-1/2 pr-2">
-                        <label for="data_entrega" class="font-semibold">Data de Entrega:</label>
-                        <input type="text" id="data_entrega" name="data_entrega" value="01/01/2023" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                        <label for="data_entrega" class="font-semibold"
+                            >Data de Entrega:</label
+                        >
+                        <input
+                            type="text"
+                            id="data_entrega"
+                            name="data_entrega"
+                            value="01/01/2023"
+                            class="block w-full mb-2 p-2 rounded border border-gray-300"
+                        />
                     </div>
                     <div class="w-1/2 pl-2">
-                        <label for="hora_entrega" class="font-semibold">Hora de Entrega:</label>
-                <input type="text" id="hora_entrega" name="hora_entrega" value="15:00" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                        <label for="hora_entrega" class="font-semibold"
+                            >Hora de Entrega:</label
+                        >
+                        <input
+                            type="text"
+                            id="hora_entrega"
+                            name="hora_entrega"
+                            value="15:00"
+                            class="block w-full mb-2 p-2 rounded border border-gray-300"
+                        />
                     </div>
                 </div>
             </div>
 
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
-                <h2 class="uppercase text-lg font-semibold mb-3">Informações de contato</h2>
-                <label for="cliente_nome" class="font-semibold">Nome do Cliente:</label>
-                <input type="text" id="cliente_nome" name="cliente_nome" value="{{ request.user.first_name }} {{ request.user.last_name }}" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                <h2 class="uppercase text-lg font-semibold mb-3">
+                    Informações de contato
+                </h2>
+                <label for="cliente_nome" class="font-semibold"
+                    >Nome do Cliente:</label
+                >
+                <input
+                    type="text"
+                    id="cliente_nome"
+                    name="cliente_nome"
+                    value="{{ request.user.first_name }} {{ request.user.last_name }}"
+                    class="block w-full mb-2 p-2 rounded border border-gray-300"
+                />
                 <div class="flex">
                     <div class="w-1/2 pr-2">
-                        <label for="cliente_email" class="font-semibold">Email do Cliente:</label>
-                        <input type="text" id="cliente_email" name="cliente_email" value="{{ request.user.email }}" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                        <label for="cliente_email" class="font-semibold"
+                            >Email do Cliente:</label
+                        >
+                        <input
+                            type="text"
+                            id="cliente_email"
+                            name="cliente_email"
+                            value="{{ request.user.email }}"
+                            class="block w-full mb-2 p-2 rounded border border-gray-300"
+                        />
                     </div>
                     <div class="w-1/2 pl-2">
-                        <label for="cliente_telefone" class="font-semibold">Telefone do Cliente:</label>
-                        <input type="text" id="cliente_telefone" name="cliente_telefone" value="(11) 98765-4321" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                        <label for="cliente_telefone" class="font-semibold"
+                            >Telefone do Cliente:</label
+                        >
+                        <input
+                            type="text"
+                            id="cliente_telefone"
+                            name="cliente_telefone"
+                            value="(11) 98765-4321"
+                            class="block w-full mb-2 p-2 rounded border border-gray-300"
+                        />
                     </div>
                 </div>
             </div>
 
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
-                <h2 class="uppercase text-lg font-semibold mb-3">Forma de pagamento</h2>
-                <label for="forma_pagamento" class="font-semibold">Forma de Pagamento:</label>
-                <input type="text" id="forma_pagamento" name="forma_pagamento" value="Cartão de Crédito" class="block w-full mb-2 p-2 rounded border border-gray-300">
-            </div>
-           
-        </div>
-        <div class="resumo w-full lg:w-5/12 bg-gray-100 rounded-xl p-4 mt-16">
-            <h2 class="uppercase text-lg font-semibold mb-3 text-center">Resumo</h2>
-            <div class="grid grid-cols-3 gap-4">
-                <div class="text-center">
-                    <p class="font-semibold">Nome do Produto</p>
-                </div>
-                <div class="text-center">
-                    <p class="font-semibold">Quantidade</p>
-                </div>
-                <div class="text-center">
-                    <p class="font-semibold">Preço</p>
-                </div>
-                <!-- Produto 1 -->
-                <div class="text-center">
-                    <p>Produto 1</p>
-                </div>
-                <div class="text-center">
-                    <p>2</p>
-                </div>
-                <div class="text-center">
-                    <p>R$ 40.00</p>
-                </div>
-                <!-- Produto 2 -->
-                <div class="text-center">
-                    <p>Produto 2</p>
-                </div>
-                <div class="text-center">
-                    <p>3</p>
-                </div>
-                <div class="text-center">
-                    <p>R$ 20.00</p>
-                </div>
-                <!-- Total -->
-                <div class="text-center col-span-3">
-                    <p class="font-semibold">Total</p>
-                </div>
-                <div class="text-center col-span-3">
-                    <p class="font-semibold text-xl">R$ {{ cart.get_total_price }}</p>
-                </div>
+                <h2 class="uppercase text-lg font-semibold mb-3">
+                    Forma de pagamento
+                </h2>
+                <label for="forma_pagamento" class="font-semibold"
+                    >Forma de Pagamento:</label
+                >
+                <input
+                    type="text"
+                    id="forma_pagamento"
+                    name="forma_pagamento"
+                    value="Cartão de Crédito"
+                    class="block w-full mb-2 p-2 rounded border border-gray-300"
+                />
             </div>
             <div class="flex justify-center mt-4">
-                <button type="submit" class="bg-gray-600 hover:bg-emerald-800 text-white uppercase py-3 px-5 rounded-full text-center">Confirmar pedido</button>
+                <button
+                    type="submit"
+                    class="bg-gray-600 hover:bg-emerald-800 text-white uppercase py-3 px-5 rounded-full text-center"
+                >
+                    Confirmar pedido
+                </button>
             </div>
         </div>
-    {% comment %} </form> {% endcomment %}
-</div>
+    </form>
 
+    <div class="resumo w-full lg:w-5/12 bg-gray-100 rounded-xl p-4 mt-16">
+        <h2 class="uppercase text-lg font-semibold mb-3 text-center">Resumo</h2>
+        <div class="grid grid-cols-3 gap-4">
+            <div class="text-center">
+                <p class="font-semibold">Nome do Produto</p>
+            </div>
+            <div class="text-center">
+                <p class="font-semibold">Quantidade</p>
+            </div>
+            <div class="text-center">
+                <p class="font-semibold">Preço</p>
+            </div>
+            <!-- Produto 1 -->
+            <div class="text-center">
+                <p>Produto 1</p>
+            </div>
+            <div class="text-center">
+                <p>2</p>
+            </div>
+            <div class="text-center">
+                <p>R$ 40.00</p>
+            </div>
+            <!-- Produto 2 -->
+            <div class="text-center">
+                <p>Produto 2</p>
+            </div>
+            <div class="text-center">
+                <p>3</p>
+            </div>
+            <div class="text-center">
+                <p>R$ 20.00</p>
+            </div>
+            <!-- Total -->
+            <div class="text-center col-span-3">
+                <p class="font-semibold">Total</p>
+            </div>
+            <div class="text-center col-span-3">
+                <p class="font-semibold text-xl">
+                    R$ {{ cart.get_total_price }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
