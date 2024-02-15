@@ -1,21 +1,72 @@
 {% extends 'core/base.html' %} {% block title %}Confirmar pedido {% endblock %}
 {% block content %}
 
-<div class="max-w-screen-xl mx-auto p-4 xl:p-0 flex items-start py-6">
+<div
+    class="max-w-screen-xl mx-auto p-4 xl:p-0 flex flex-col lg:flex-row items-start py-6"
+>
+    <!-- Resumo -->
+    <div class="w-full lg:w-5/12 p-4 mb-4 lg:mb-0">
+        <h1 class="uppercase text-2xl font-semibold mb-5 mt-3">
+            Confirmar Pedido
+        </h1>
+        <div class="bg-gray-100 rounded-xl">
+            <h2 class="uppercase text-lg font-semibold mb-3 text-center">
+                Resumo
+            </h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                    <p class="font-semibold">Nome do Produto</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-semibold">Quantidade</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-semibold">Preço Total</p>
+                </div>
+                <!-- Produto 1 -->
+                <div class="text-center">
+                    <p>Produto 1</p>
+                </div>
+                <div class="text-center">
+                    <p>2</p>
+                </div>
+                <div class="text-center">
+                    <p>R$ 40.00</p>
+                </div>
+                <!-- Produto 2 -->
+                <div class="text-center">
+                    <p>Produto 2</p>
+                </div>
+                <div class="text-center">
+                    <p>3</p>
+                </div>
+                <div class="text-center">
+                    <p>R$ 20.00</p>
+                </div>
+                <!-- Total -->
+                <div class="text-center col-span-3">
+                    <p class="font-semibold">Total</p>
+                </div>
+                <div class="text-center col-span-3">
+                    <p class="font-semibold text-xl">
+                        R$ {{ cart.get_total_price }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Formulário -->
     <form
         id="confirmacao_pedido_form"
         method="post"
         action="{% url 'start_order' %}"
         hx-post="{% url 'start_order' %}"
         hx-trigger="submit"
-        class="w-full lg:w-7/12 pr-4"
+        class="w-full lg:w-7/12 pr-4 mt-20"
     >
         {% csrf_token %}
-        <div class="w-full lg:w-7/12 pr-4">
-            <h1 class="uppercase text-2xl font-semibold mb-5 mt-3">
-                Confirmar Pedido
-            </h1>
-
+        <!-- Seção de formulário -->
+        <div class="w-full lg:w-7/12">
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
                 <h2 class="uppercase text-lg font-semibold mb-3">Vendedor</h2>
                 <label for="vendedor_nome" class="font-semibold"
@@ -101,7 +152,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
                 <h2 class="uppercase text-lg font-semibold mb-3">
                     Informações de contato
@@ -143,7 +193,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
                 <h2 class="uppercase text-lg font-semibold mb-3">
                     Forma de pagamento
@@ -169,50 +218,6 @@
             </div>
         </div>
     </form>
-
-    <div class="resumo w-full lg:w-5/12 bg-gray-100 rounded-xl p-4 mt-16">
-        <h2 class="uppercase text-lg font-semibold mb-3 text-center">Resumo</h2>
-        <div class="grid grid-cols-3 gap-4">
-            <div class="text-center">
-                <p class="font-semibold">Nome do Produto</p>
-            </div>
-            <div class="text-center">
-                <p class="font-semibold">Quantidade</p>
-            </div>
-            <div class="text-center">
-                <p class="font-semibold">Preço</p>
-            </div>
-            <!-- Produto 1 -->
-            <div class="text-center">
-                <p>Produto 1</p>
-            </div>
-            <div class="text-center">
-                <p>2</p>
-            </div>
-            <div class="text-center">
-                <p>R$ 40.00</p>
-            </div>
-            <!-- Produto 2 -->
-            <div class="text-center">
-                <p>Produto 2</p>
-            </div>
-            <div class="text-center">
-                <p>3</p>
-            </div>
-            <div class="text-center">
-                <p>R$ 20.00</p>
-            </div>
-            <!-- Total -->
-            <div class="text-center col-span-3">
-                <p class="font-semibold">Total</p>
-            </div>
-            <div class="text-center col-span-3">
-                <p class="font-semibold text-xl">
-                    R$ {{ cart.get_total_price }}
-                </p>
-            </div>
-        </div>
-    </div>
 </div>
 
 {% endblock %}

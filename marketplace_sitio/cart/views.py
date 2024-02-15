@@ -52,6 +52,7 @@ def update_cart(request, product_id, action):
                 'image': product.image,
                 'get_thumbnail': product.get_thumbnail(),
                 'price': product.price,
+                'description': product.description,
             },
             'total_price': quantity * product.price,
             'quantity': quantity,
