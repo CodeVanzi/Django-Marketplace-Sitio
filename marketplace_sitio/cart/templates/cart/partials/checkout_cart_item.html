@@ -1,0 +1,11 @@
+{% if item %}
+<div class="text-center">
+    <p><a href="#">{{ item.product.name }}</a></p>
+</div>
+<div class="text-center">
+    <p>{{ item.quantity }}</p>
+</div>
+<div class="text-center">
+    <p>R$ {{ item.total_price }}</p>
+</div>
+{% endif %}

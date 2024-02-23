@@ -23,26 +23,10 @@
                 <div class="text-center">
                     <p class="font-semibold">Preço Total</p>
                 </div>
-                <!-- Produto 1 -->
-                <div class="text-center">
-                    <p>Produto 1</p>
-                </div>
-                <div class="text-center">
-                    <p>2</p>
-                </div>
-                <div class="text-center">
-                    <p>R$ 40.00</p>
-                </div>
-                <!-- Produto 2 -->
-                <div class="text-center">
-                    <p>Produto 2</p>
-                </div>
-                <div class="text-center">
-                    <p>3</p>
-                </div>
-                <div class="text-center">
-                    <p>R$ 20.00</p>
-                </div>
+                <!-- Produtos -->
+                {% for item in cart %} 
+                {% include 'cart/partials/checkout_cart_item.html'%} 
+                {%endfor%}
                 <!-- Total -->
                 <div class="text-center col-span-3">
                     <p class="font-semibold">Total</p>
