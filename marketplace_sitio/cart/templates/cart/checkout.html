@@ -94,14 +94,35 @@
                 <h2 class="uppercase text-lg font-semibold mb-3">
                     Endereço de entrega
                 </h2>
-                <label for="endereco_entrega" class="font-semibold"
+                <label for="address" class="font-semibold"
                     >Endereço:</label
                 >
                 <input
                     type="text"
-                    id="endereco_entrega"
-                    name="endereco_entrega"
+                    id="address"
+                    name="address"
                     value="Rua Exemplo, 123"
+                    class="block w-full mb-2 p-2 rounded border border-gray-300"
+                />
+                <label for="cidade" class="font-semibold"
+                    >Cidade:</label
+                >
+                <input
+                    type="text"
+                    id="cidade"
+                    name="cidade"
+                    value="São Paulo"
+                    class="block w-full mb-2 p-2 rounded border border-gray-300"
+                />
+                
+                <label for="zipcode" class="font-semibold"
+                    >CEP:</label
+                >
+                <input
+                    type="text"
+                    id="zipcode"
+                    name="zipcode"
+                    value="05564200"
                     class="block w-full mb-2 p-2 rounded border border-gray-300"
                 />
             </div>
@@ -140,37 +161,53 @@
                 <h2 class="uppercase text-lg font-semibold mb-3">
                     Informações de contato
                 </h2>
-                <label for="cliente_nome" class="font-semibold"
-                    >Nome do Cliente:</label
-                >
-                <input
-                    type="text"
-                    id="cliente_nome"
-                    name="cliente_nome"
-                    value="{{ request.user.first_name }} {{ request.user.last_name }}"
-                    class="block w-full mb-2 p-2 rounded border border-gray-300"
-                />
                 <div class="flex">
                     <div class="w-1/2 pr-2">
-                        <label for="cliente_email" class="font-semibold"
+                        <label for="first_name" class="font-semibold"
+                            >Nome:</label
+                        >
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            value="{{ request.user.first_name }}"
+                            class="block w-full mb-2 p-2 rounded border border-gray-300"
+                        />
+                    </div>
+                    <div class="w-1/2 pl-2">
+                        <label for="last_name" class="font-semibold"
+                            >Sobrenome:</label
+                        >
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            value="{{ request.user.last_name }}"
+                            class="block w-full mb-2 p-2 rounded border border-gray-300"
+                        />
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="w-1/2 pr-2">
+                        <label for="email" class="font-semibold"
                             >Email do Cliente:</label
                         >
                         <input
                             type="text"
-                            id="cliente_email"
-                            name="cliente_email"
+                            id="email"
+                            name="email"
                             value="{{ request.user.email }}"
                             class="block w-full mb-2 p-2 rounded border border-gray-300"
                         />
                     </div>
                     <div class="w-1/2 pl-2">
-                        <label for="cliente_telefone" class="font-semibold"
+                        <label for="phone" class="font-semibold"
                             >Telefone do Cliente:</label
                         >
                         <input
                             type="text"
-                            id="cliente_telefone"
-                            name="cliente_telefone"
+                            id="phone"
+                            name="phone"
                             value="(11) 98765-4321"
                             class="block w-full mb-2 p-2 rounded border border-gray-300"
                         />

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from product.models import Product
+from django.utils import timezone
 
 class Order(models.Model):
     ORDERED = 'ordered'
@@ -19,8 +20,14 @@ class Order(models.Model):
     email = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
     zipcode = models.CharField(max_length=255)
-    place = models.CharField(max_length=255)
+    cidade = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
+    hora_entrega = models.CharField(max_length=255)
+    data_entrega = models.DateField(default=timezone.now())
+    vendedor_nome = models.CharField(max_length=255)
+    telefone_vendedor = models.CharField(max_length=255)
+    vendedor_email = models.CharField(max_length=255)
+    forma_pagamento = models.CharField(max_length=255)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
