@@ -23,7 +23,7 @@ class Order(models.Model):
     cidade = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
     hora_entrega = models.CharField(max_length=255)
-    data_entrega = models.DateField(default=timezone.now())
+    data_entrega = models.DateField()
     vendedor_nome = models.CharField(max_length=255)
     telefone_vendedor = models.CharField(max_length=255)
     vendedor_email = models.CharField(max_length=255)
@@ -36,6 +36,8 @@ class Order(models.Model):
     quantity = models.IntegerField(default=1)
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=ORDERED)
+    
+    
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)

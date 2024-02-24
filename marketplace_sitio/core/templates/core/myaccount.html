@@ -25,7 +25,7 @@
         {% for order in request.user.orders.all %}
             <div class="order w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
                 <div class="mb-6 flex justify-between w-full">
-                    <a href="#">Pedido id: 1</a>
+                    <a href="#">Pedido id: {{ order.id }}</a>
                 </div>
             
                 <div class="mb-6 w-full">
