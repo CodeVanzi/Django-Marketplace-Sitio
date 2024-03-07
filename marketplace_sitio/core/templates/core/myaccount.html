@@ -32,8 +32,11 @@
                     {% for item in order.items.all %}
                         <div class="product mb-6 flex pr-6 w-full">
                             <div class="w-1/8 ">
-                                <a href="#" alt="{{ order.item.name }}" class="" >
-                                    <img class="h-12 w-12 object-cover hover:shadow-lg rounded-xl" src="https://via.placeholder.com/150" >
+                                <a href="#" class="w-1/4">
+                                    <img
+                                        src="{{ item.product.get_thumbnail }}"
+                                        class="hover:shadow-lg rounded-xl h-24 w-24 object-cover"
+                                    />
                                 </a>
                             </div>
                 
@@ -41,7 +44,8 @@
                                 <div class="flex justify-between">
                                     <a href="#" class="font-semibold "> {{ item.product.name }}</a>
                                     <span class="text-gray-600">{{ item.product.price }}</span>
-                                    <p class="mb-6 pt-1 text-gray-600">R$ {{ item.total_price }}</p> #revisar
+                                    <span class="text-gray-600">{{ item.quantity }}</span>
+                                    <p class="mb-6 pt-1 text-gray-600">R$ {{ item.price }}</p>
                                 </div>
                             </div>
                         </div>
