@@ -82,3 +82,7 @@ def hx_menu_cart(request):
 def hx_cart_total(request):
     cart = Cart(request)
     return render(request, 'cart/partials/cart_total.html', {'cart': cart})
+
+def cart(request):
+    cart = Cart(request)
+    return render(request, 'cart/cart.html', {'cart': cart})

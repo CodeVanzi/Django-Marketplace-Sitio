@@ -2,28 +2,30 @@
 {%block content%}
 
 <div class="max-w-7xl mx-auto flexflex-wrap items-start py-6 px-6 xl:px-0">
-    <div class="grid justify-between grid-cols-5 gap-4">
-        <div class="text-center">
-            <p class="font-semibold"></p>
+    
+    <div class="w-full lg:w-3/4 p-6 bg-gray-100 rounded-xl">
+        <div class="grid justify-between grid-cols-5 gap-4">
+            <div class="text-center">
+                <p class="font-semibold"></p>
+            </div>
+            <div class="text-center">
+                <p class="font-semibold">Nome</p>
+            </div>
+            <div class="text-center">
+                <p class="font-semibold">Descrição</p>
+            </div>
+            <div class="text-center">
+                <p class="font-semibold">Preço Unitário</p>
+            </div>
+            <div class="text-center">
+                <p class="font-semibold">Preço Total</p>
+            </div>
         </div>
-        <div class="text-center">
-            <p class="font-semibold">Nome</p>
-        </div>
-        <div class="text-center">
-            <p class="font-semibold">Descrição</p>
-        </div>
-        <div class="text-center">
-            <p class="font-semibold">Preço Unitário</p>
-        </div>
-        <div class="text-center">
-            <p class="font-semibold">Preço Total</p>
+        <div class="products w-full mt-3 lg:w-3/4">
+            {% for item in cart %} {% include 'cart/partials/cart_item.html'%}
+            {%endfor%}
         </div>
     </div>
-    <div class="products w-full mt-3 lg:w-3/4">
-        {% for item in cart %} {% include 'cart/partials/cart_item.html'%}
-        {%endfor%}
-    </div>
-
     <div class="summary w-full lg:w-1/4 p-6 bg-gray-100 rounded-xl mt-3">
         <h2 class="uppercase text-lg font-semibold mb-3 text-center">Resumo</h2>
         <div class="flex justify-between mb-5">

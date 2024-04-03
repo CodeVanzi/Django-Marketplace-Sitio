@@ -1,12 +1,13 @@
 {% extends 'core/base.html' %} {% block title %}Confirmar pedido {% endblock %}
-{% block content %}
 
+
+{% block content %}
 <div
     class="max-w-screen-xl mx-auto p-4 xl:p-0 flex flex-col lg:flex-row items-start py-6"
 >
     <!-- Resumo -->
     <div class="w-full lg:w-5/12 p-4 mb-4 lg:mb-0">
-        <h1 class="uppercase text-2xl font-semibold mb-5 mt-3">
+        <h1 class="uppercase text-2xl font-semibold mb-5 mt-3 text-gray-900 dark:text-white">
             Confirmar Pedido
         </h1>
         <div class="bg-gray-100 rounded-xl">
@@ -38,18 +39,19 @@
                 </div>
             </div>
         </div>
+        <br>
+        <div class="bg-gray-100 bg-red-100 rounded-xl p-4 mb-4" id="errors">
+            <h2 class="uppercase text-lg font-semibold mb-3 text-center">
+                Erros de Preenchimento no formulário
+            </h2>
+        </div>
     </div>
     <!-- Formulário -->
-    <form
-        id="confirmacao_pedido_form"
-        method="post"
-        action="{% url 'start_order' %}"
-        hx-post="{% url 'start_order' %}"
-        hx-trigger="submit"
+    <div
         class="w-full lg:w-7/12 pr-4 mt-20"
     >
-        {% csrf_token %}
-        <!-- Seção de formulário -->
+    
+    <!-- Seção de formulário -->
         <div class="w-full lg:w-7/12">
             <div class="bg-gray-100 rounded-xl p-4 mb-4">
                 <h2 class="uppercase text-lg font-semibold mb-3">Vendedor</h2>
@@ -231,14 +233,132 @@
             </div>
             <div class="flex justify-center mt-4">
                 <button
-                    type="submit"
+                    onclick="buy(event)"
                     class="bg-gray-600 hover:bg-emerald-800 text-white uppercase py-3 px-5 rounded-full text-center"
                 >
                     Confirmar pedido
                 </button>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
+    <script>       
+
+        function validateForm(data) {
+            let errors = []
+
+            if (data.first_name === '') {
+                errors.push('Primeiro nome está vazio')
+            }
+
+            if (data.last_name === '') {
+                errors.push('Sobrenome está vazio')
+            }
+
+            if (data.email === '') {
+                errors.push('Email está vazio')
+            }
+
+            if (data.phone === '') {
+                errors.push('Telefone está vazio')
+            }
+
+            if (data.address === '') {
+                errors.push('Endereço está vazio')
+            }
+
+            if (data.zipcode === '') {
+                errors.push('CEP está vazio')
+            }
+
+            if (data.cidade === '') {
+                errors.push('Cidade está vazio')
+            }
+            
+            if (data.hora_entrega === '') {
+                errors.push('Hora de entrega está vazio')
+            }
+        
+            if (data.data_entrega === '') {
+                errors.push('Data de entrega está vazio')
+            }
+
+            if (data.vendedor_nome === '') {
+                errors.push('Nome do vendedor está vazio')
+            }
+
+            if (data.telefone_vendedor === '') {
+                errors.push('Telefone do vendedor está vazio')
+            }
+
+            if (data.vendedor_email === '') {
+                errors.push('Email do vendedor está vazio')
+            }
+
+            if (data.forma_pagamento === '') {
+                errors.push('Forma de pagamento está vazio')
+            }
+
+            return errors
+        }
+        function buy(event) {
+            event.preventDefault()
+
+            let data = {
+                'first_name': document.querySelector('input[name=first_name]').value,
+                'last_name': document.querySelector('input[name=last_name]').value,
+                'email': document.querySelector('input[name=email]').value,
+                'phone': document.querySelector('input[name=phone]').value,
+                'address': document.querySelector('input[name=address]').value,
+                'zipcode': document.querySelector('input[name=zipcode]').value,
+                'cidade': document.querySelector('input[name=cidade]').value,
+                'hora_entrega': document.querySelector('input[name=hora_entrega]').value,
+                'data_entrega': document.querySelector('input[name=data_entrega]').value,
+                'vendedor_nome': document.querySelector('input[name=vendedor_nome]').value,
+                'telefone_vendedor': document.querySelector('input[name=telefone_vendedor]').value,
+                'vendedor_email': document.querySelector('input[name=vendedor_email]').value,
+                'forma_pagamento': document.querySelector('input[name=forma_pagamento]').value,
+            }
+
+            let errors = validateForm(data)
+
+            if (errors.length) {
+                console.log('Errors', errors)
+            } else {
+                var stripe = Stripe('{{ pub_key }}')
+
+                fetch('/order/start_order/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(data)
+                })
+                .then(function(response) {
+                    return response.json()
+                })
+                .then(function(session) {
+                    return stripe.redirectToCheckout({ sessionId: session.session.id })
+                })
+                .then(function(result) {
+                    if (result.error) {
+                        alert(result.error.message)
+                    }
+                })
+                .catch(function(error) {
+                    console.log('Errors', error)
+                })
+            }
+
+            return false
+        }
+        
+    </script>
 {% endblock %}
