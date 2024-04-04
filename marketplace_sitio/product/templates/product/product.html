@@ -8,36 +8,39 @@
         <div class="w-full">
             <img src="{% if product.image %}{{ product.image.url }}{% else %}http://via.placeholder.com/800x800{% endif %}" alt="Product Image" class="w-full rounded-lg shadow-md">
         </div>
-        <div class="flex flex-col justify-center lg:justify-start">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">{{ product.name }}</h1>
-            <p class="text-xl text-gray-700 dark:text-gray-300 mb-6">R$ {{ product.price }}</p>
+        <div class="flex flex-col lg:justify-start lg:ml-10">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-12">{{ product.name }}</h1>
             {% if product.description %}
-                <p class="text-lg text-gray-800 dark:text-gray-400">{{ product.description }}</p>
+            <p class="text-lg text-gray-800 dark:text-gray-400 mb-12 ">{{ product.description }}</p>
             {% endif %}
-            <div class="flex flex-col lg:flex-row items-start lg:items-center mt-6">
+            <p class="grid text-xl text-gray-700 dark:text-gray-300 mb-12 justify-items-end xl:mr-12 2xl:mr-40">R$ {{ product.price }}</p>
+
+
+            <div class="flex flex-col lg:flex-row items-start text-center lg:items-center mt-12">
+
                 <button href="#" 
-                        class="w-full lg:w-auto bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-md transition-colors duration-300 ease-in-out mb-2 lg:mb-0 mr-0 lg:mr-4"
+                class="w-full lg:w-auto bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-md transition-colors duration-300 ease-in-out mb-2 mr-2 lg:ml-12"
+                hx-get="{% url 'update_cart' product.id 'increment' %}"
+                hx-target="#menu-cart-button"
+                hx-swap="outerHTML">
+                    Adicionar
+                </button>
+               
+                <button href="#" 
+                        class="w-full lg:w-auto bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-md transition-colors duration-300 ease-in-out mb-2  mr-2 "
                         hx-get="{% url 'remove_all_from_cart' product.id %}"
                         hx-target="#menu-cart-button"
                         hx-swap="outerHTML">
                     Remover
                 </button>
 
-                <button href="#" 
-                        class="w-full lg:w-auto bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-md transition-colors duration-300 ease-in-out mb-2 lg:mb-0 lg:mr-4"
-                        hx-get="{% url 'update_cart' product.id 'increment' %}"
-                        hx-target="#menu-cart-button"
-                        hx-swap="outerHTML">
-                    Adicionar
-                </button>
-                
                 <a href="{% url 'cart' %}" 
-                        class="w-full lg:w-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md transition-colors duration-300 ease-in-out mr-0 lg:mr-4">
+                        class="w-full lg:w-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md transition-colors duration-300 ease-in-out mb-2 mr-2">
                     Ir para o Carrinho
                 </a>
 
                 <a href="{% url 'shop' %}" 
-                        class="w-full lg:w-auto bg-violet-500 hover:bg-violet-600 text-white px-4 py-2 rounded-md shadow-md transition-colors duration-300 ease-in-out">
+                        class="w-full lg:w-auto bg-violet-500 hover:bg-violet-600 text-white px-4 py-2 rounded-md shadow-md transition-colors duration-300 ease-in-out mb-2 mr-2">
                     Ir para a loja
                 </a>
                 
