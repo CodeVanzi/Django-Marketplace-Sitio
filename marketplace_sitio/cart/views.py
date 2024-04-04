@@ -3,28 +3,31 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from product.models import Product
+from order.models import Order
 from .cart import Cart
+from django.http import HttpResponse
 
 
 
 
-def update_menu_cart(request, product_id, action):
-    cart = Cart(request)
-    product = Product.objects.get(id=product_id)
+
+# def update_menu_cart(request, product_id, action):
+#     cart = Cart(request)
+#     product = Product.objects.get(id=product_id)
     
-    if action == 'increment':
-        cart.add(product=product, quantity=1, update_quantity=True)
-    elif action == 'decrement':
-        cart.add(product=product, quantity=-1, update_quantity=True)
-    elif action == 'remove':
-        cart.remove(product=product)
-    elif action == 'clear':
-        cart.clear()
+#     if action == 'increment':
+#         cart.add(product=product, quantity=1, update_quantity=True)
+#     elif action == 'decrement':
+#         cart.add(product=product, quantity=-1, update_quantity=True)
+#     elif action == 'remove':
+#         cart.remove(product=product, update_quantity=True)
+#     elif action == 'clear':
+#         cart.clear()
     
-    response = render(request, 'cart/partials/menu_cart.html', {'cart': cart})
-    response['HX-Trigger'] = 'update-menu-cart'
+#     response = render(request, 'cart/partials/menu_cart.html', {'cart': cart})
+#     response['HX-Trigger'] = 'update-menu-cart'
     
-    return response
+#     return response
 
 
 def update_cart(request, product_id, action):
@@ -36,8 +39,6 @@ def update_cart(request, product_id, action):
         cart.add(product=product, quantity=1, update_quantity=True)
     elif action == 'decrement':
         cart.add(product=product, quantity=-1, update_quantity=True)
-    elif action == 'remove':
-        cart.remove(product=product)
     elif action == 'clear':
         cart.clear()
     
@@ -65,7 +66,14 @@ def update_cart(request, product_id, action):
     
     return response
 
-
+def remove_all_from_cart(request, product_id):
+    cart = Cart(request)
+    cart.remove_all(product_id)
+    item = None
+    response = render(request, 'cart/partials/cart_item.html', {'item': item})
+    response['HX-Trigger'] = 'update-menu-cart'
+    return response
+    
 def cart(request):
     cart = Cart(request)
     return render(request, 'cart/cart.html', {'cart': cart})
@@ -73,7 +81,8 @@ def cart(request):
 @login_required
 def checkout(request):
     pub_key = settings.STRIPE_API_KEY_PUBLISHABLE
-    return render(request, 'cart/checkout.html', {'pub_key': pub_key})
+    payment_options = Order.PAYMENT_CHOICES
+    return render(request, 'cart/checkout.html', {'pub_key': pub_key, 'payment_options': payment_options})
 
 def hx_menu_cart(request):
     cart = Cart(request)
@@ -83,6 +92,6 @@ def hx_cart_total(request):
     cart = Cart(request)
     return render(request, 'cart/partials/cart_total.html', {'cart': cart})
 
-def cart(request):
-    cart = Cart(request)
-    return render(request, 'cart/cart.html', {'cart': cart})
+
+def success(request):
+    return render(request, 'cart/success.html')

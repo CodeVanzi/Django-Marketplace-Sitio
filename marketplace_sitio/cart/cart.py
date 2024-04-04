@@ -61,6 +61,13 @@ class Cart(object):
             del self.cart[product_id]
             self.save()
             
+    def remove_all(self, product_id):
+        product_id = str(product_id)  # Define the "product_id" variable
+        for item_id in list(self.cart.keys()):
+            if self.cart[item_id]['id'] == product_id:  # Use the "product_id" variable
+                del self.cart[item_id]
+        self.save()
+            
     def clear(self):
         # remove cart from session
         del self.session[settings.CART_SESSION_ID]

@@ -2,6 +2,7 @@
 
 
 {% block content %}
+{% if cart.get_total_quantity > 0 %} 
 <div
     class="max-w-screen-xl mx-auto p-4 xl:p-0 flex flex-col lg:flex-row items-start py-6"
 >
@@ -10,7 +11,7 @@
         <h1 class="uppercase text-2xl font-semibold mb-5 mt-3 text-gray-900 dark:text-white">
             Confirmar Pedido
         </h1>
-        <div class="bg-gray-100 rounded-xl">
+        <div class="bg-emerald-100 rounded-xl">
             <h2 class="uppercase text-lg font-semibold mb-3 text-center">
                 Resumo
             </h2>
@@ -39,12 +40,10 @@
                 </div>
             </div>
         </div>
-        <br>
-        <div class="bg-gray-100 bg-red-100 rounded-xl p-4 mb-4" id="errors">
-            <h2 class="uppercase text-lg font-semibold mb-3 text-center">
-                Erros de Preenchimento no formulário
-            </h2>
-        </div>
+
+
+
+
     </div>
     <!-- Formulário -->
     <div
@@ -223,13 +222,14 @@
                 <label for="forma_pagamento" class="font-semibold"
                     >Forma de Pagamento:</label
                 >
-                <input
-                    type="text"
-                    id="forma_pagamento"
-                    name="forma_pagamento"
-                    value="Cartão de Crédito"
-                    class="block w-full mb-2 p-2 rounded border border-gray-300"
-                />
+                <select id="forma_pagamento" name="forma_pagamento" class="block w-full mb-2 p-2 rounded border border-gray-300">
+                    {% for option in payment_options %} 
+                        <option value="{{ option.0 }}">{{ option.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="bg-gray-100 bg-red-100 rounded-xl p-4 mb-4" id="erros" style="display: none;">
+
             </div>
             <div class="flex justify-center mt-4">
                 <button
@@ -243,12 +243,29 @@
     </div>
 </div>
 
+{% else %}
+
+<div class="max-w-7xl mx-auto flex items-center justify-center h-screen">
+    <div class="text-center">
+        <h2 class="text-2xl text-gray-900 dark:text-white font-semibold">Seu carrinho está vazio</h2>
+        <p class="text-gray-500 mt-3">Adicione produtos ao seu carrinho</p>
+        <br><br>
+        <a
+            href="{% url 'shop' %}"
+            class="w-48 bg-gray-600 hover:bg-emerald-800 text-white uppercase py-3 px-5 rounded-full text-center mt-5"
+            >Ir para a loja</a
+        >
+    </div>
+</div>
+
+{% endif %}
+
 {% endblock %}
 
 {% block scripts %}
     <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
-    <script>       
-
+    <script>
+        
         function validateForm(data) {
             let errors = []
 
@@ -265,7 +282,7 @@
             }
 
             if (data.phone === '') {
-                errors.push('Telefone está vazio')
+                errors.push('Telefone do cliente está vazio')
             }
 
             if (data.address === '') {
@@ -322,14 +339,24 @@
                 'vendedor_nome': document.querySelector('input[name=vendedor_nome]').value,
                 'telefone_vendedor': document.querySelector('input[name=telefone_vendedor]').value,
                 'vendedor_email': document.querySelector('input[name=vendedor_email]').value,
-                'forma_pagamento': document.querySelector('input[name=forma_pagamento]').value,
+                'forma_pagamento': document.querySelector('select[name=forma_pagamento]').value,
             }
 
             let errors = validateForm(data)
 
+            let errosDiv = document.querySelector('#erros');
+
             if (errors.length) {
                 console.log('Errors', errors)
+                errosDiv.style.display = 'block';
+                let html = '<ul>';
+                errors.forEach((error) => {
+                    html += '<li>' + error + '</li>';
+                });
+                html += '</ul>';
+                errosDiv.innerHTML = html;
             } else {
+                errosDiv.style.display = 'none';
                 var stripe = Stripe('{{ pub_key }}')
 
                 fetch('/order/start_order/', {
@@ -358,7 +385,6 @@
             }
 
             return false
-        }
-        
+        } 
     </script>
 {% endblock %}

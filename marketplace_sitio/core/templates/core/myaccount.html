@@ -53,18 +53,19 @@
                 </div>
 
                 <div class="mb-2 w-full">
-                    <strong>Total:</strong> <span class="text-gray-600">R$ 100,00</span>
+                    <strong>Total:</strong> <span class="text-gray-600">R$ {{ order.paid_amount }}</span>
                     <br>
-                    <strong>Situação do pedido:</strong> <span class="text-emerald-600">Aprovado</span>
+                    <strong>Situação do pedido:</strong> <span class="text-emerald-600"> {{ order.status }}</span>
                     <br>
                     <strong>Data do pedido:</strong> <span class="text-gray-600">{{ order.created_at }}</span>
                     <br>
-                    <strong>Forma de pagamento:</strong> <span class="text-gray-600">Cartão de crédito</span>
+                    <strong>Forma de pagamento:</strong> <span class="text-gray-600">{{ order.forma_pagamento }}</span>
                     <br>
-                    <strong>Endereço de entrega:</strong> <span class="text-gray-600">Rua tal, 123, Bairro tal, Cidade tal, Estado tal</span>
+                    <strong>Endereço de entrega:</strong> <span class="text-gray-600">{{order.address}}, {{order.cidade}} </span>
                     <br>
-                    <strong>Situação da entrega:</strong> <span class="text-gray-600">12345-678</span>
-                    
+                    <strong>Data e hora de entrega:</strong> <span class="text-gray-600">{{order.data_entrega}}, {{order.hora_entrega}} </span>          
+                    <br>
+                    <strong>Vendedor responsável:</strong> <span class="text-gray-600">{{order.vendedor_nome}}, {{order.telefone_vendedor}} </span> 
                 </div>
 
             </div>

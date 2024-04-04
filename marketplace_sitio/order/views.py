@@ -31,10 +31,10 @@ def start_order(request):
         
         items.append(obj)
    
-    
-    stripe.api_key = settings.STRIPE_API_KEY_HIDDEN    
+    payment_method = 'boleto' if data['forma_pagamento'] == 'Boleto' else 'card'
+    stripe.api_key = settings.STRIPE_API_KEY_HIDDEN
     session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
+        payment_method_types=[payment_method],
         line_items=items,
         mode='payment',
         success_url=settings.STRIPE_SUCCESS_URL,
@@ -71,11 +71,11 @@ def start_order(request):
         vendedor_nome=vendedor_nome,
         telefone_vendedor=telefone_vendedor,
         vendedor_email=vendedor_email,
-        forma_pagamento=forma_pagamento
+        forma_pagamento=forma_pagamento,
+        payment_intent=payment_intent,
+        paid = True if payment_intent else False,
+        paid_amount = total_price
     )
-    order.payment_intent = payment_intent
-    order.paid_amount = total_price
-    order.paid = True
     order.save()
 
     for item in cart:
@@ -84,6 +84,8 @@ def start_order(request):
         price = product.price * quantity
 
         item = OrderItem.objects.create(order=order, product=product, price=price, quantity=quantity)
+        
+    cart.clear()
 
     return JsonResponse({'session': session, 'order': payment_intent})
 
