@@ -137,10 +137,11 @@
                             >Data de Entrega:</label
                         >
                         <input
-                            type="text"
+                            type="date"
                             id="data_entrega"
                             name="data_entrega"
-                            value="01/01/2023"
+                            value=""
+                            min="{{ today|date:'Y-m-d' }}"
                             class="block w-full mb-2 p-2 rounded border border-gray-300"
                         />
                     </div>
@@ -148,13 +149,15 @@
                         <label for="hora_entrega" class="font-semibold"
                             >Hora de Entrega:</label
                         >
-                        <input
-                            type="text"
+                        <select
                             id="hora_entrega"
                             name="hora_entrega"
-                            value="15:00"
                             class="block w-full mb-2 p-2 rounded border border-gray-300"
                         />
+                        {% for option in hora_entrega %} 
+                        <option value="{{ option.0 }}">{{ option.1 }}</option>
+                    {% endfor %}
+                        </select>
                     </div>
                 </div>
             </div>
@@ -233,7 +236,7 @@
             </div>
             <div class="flex justify-center mt-4">
                 <button
-                    onclick="buy(event)"
+                    onclick="processarPedido(event)"
                     class="bg-gray-600 hover:bg-emerald-800 text-white uppercase py-3 px-5 rounded-full text-center"
                 >
                     Confirmar pedido
@@ -263,128 +266,227 @@
 {% endblock %}
 
 {% block scripts %}
-    <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
-    <script>
-        
-        function validateForm(data) {
-            let errors = []
+<script type="application/javascript" src="https://js.stripe.com/v3/"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            if (data.first_name === '') {
-                errors.push('Primeiro nome está vazio')
+<script>
+    function buy(event) {
+        event.preventDefault();
+    
+        let data = {
+            'first_name': document.querySelector('input[name=first_name]').value,
+            'last_name': document.querySelector('input[name=last_name]').value,
+            'email': document.querySelector('input[name=email]').value,
+            'phone': document.querySelector('input[name=phone]').value,
+            'address': document.querySelector('input[name=address]').value,
+            'zipcode': document.querySelector('input[name=zipcode]').value,
+            'cidade': document.querySelector('input[name=cidade]').value,
+            'hora_entrega': document.querySelector('select[name=hora_entrega]').value,
+            'data_entrega': document.querySelector('input[name=data_entrega]').value,
+            'vendedor_nome': document.querySelector('input[name=vendedor_nome]').value,
+            'telefone_vendedor': document.querySelector('input[name=telefone_vendedor]').value,
+            'vendedor_email': document.querySelector('input[name=vendedor_email]').value,
+            'forma_pagamento': document.querySelector('select[name=forma_pagamento]').value,
+        };
+    
+        var stripe = Stripe('{{ pub_key }}');
+        fetch('/order/start_order/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(data)
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(session) {
+            return stripe.redirectToCheckout({ sessionId: session.session.id });
+        })
+        .then(function(result) {
+            if (result.error) {
+                alert(result.error.message);
             }
-
-            if (data.last_name === '') {
-                errors.push('Sobrenome está vazio')
-            }
-
-            if (data.email === '') {
-                errors.push('Email está vazio')
-            }
-
-            if (data.phone === '') {
-                errors.push('Telefone do cliente está vazio')
-            }
-
-            if (data.address === '') {
-                errors.push('Endereço está vazio')
-            }
-
-            if (data.zipcode === '') {
-                errors.push('CEP está vazio')
-            }
-
-            if (data.cidade === '') {
-                errors.push('Cidade está vazio')
-            }
-            
-            if (data.hora_entrega === '') {
-                errors.push('Hora de entrega está vazio')
-            }
-        
-            if (data.data_entrega === '') {
-                errors.push('Data de entrega está vazio')
-            }
-
-            if (data.vendedor_nome === '') {
-                errors.push('Nome do vendedor está vazio')
-            }
-
-            if (data.telefone_vendedor === '') {
-                errors.push('Telefone do vendedor está vazio')
-            }
-
-            if (data.vendedor_email === '') {
-                errors.push('Email do vendedor está vazio')
-            }
-
-            if (data.forma_pagamento === '') {
-                errors.push('Forma de pagamento está vazio')
-            }
-
-            return errors
-        }
-        function buy(event) {
-            event.preventDefault()
-
-            let data = {
-                'first_name': document.querySelector('input[name=first_name]').value,
-                'last_name': document.querySelector('input[name=last_name]').value,
-                'email': document.querySelector('input[name=email]').value,
-                'phone': document.querySelector('input[name=phone]').value,
-                'address': document.querySelector('input[name=address]').value,
-                'zipcode': document.querySelector('input[name=zipcode]').value,
-                'cidade': document.querySelector('input[name=cidade]').value,
-                'hora_entrega': document.querySelector('input[name=hora_entrega]').value,
-                'data_entrega': document.querySelector('input[name=data_entrega]').value,
-                'vendedor_nome': document.querySelector('input[name=vendedor_nome]').value,
-                'telefone_vendedor': document.querySelector('input[name=telefone_vendedor]').value,
-                'vendedor_email': document.querySelector('input[name=vendedor_email]').value,
-                'forma_pagamento': document.querySelector('select[name=forma_pagamento]').value,
-            }
-
-            let errors = validateForm(data)
-
+        })
+        .catch(function(error) {
+            // Se houver um erro durante o processo, exiba-o no div #errors
             let errosDiv = document.querySelector('#erros');
+            errosDiv.style.display = 'block';
+            errosDiv.innerHTML = '<p>Ocorreu um erro ao processar o pedido. bunda, Por favor, tente novamente mais tarde.</p>';
+            console.log('Erro ao processar pedido:', error);
+        });
+    }
+    
+    function processarPedido(event) {
+        event.preventDefault();
+        let data = {
+            'zipcode': document.querySelector('input[name=zipcode]').value
+        };
+    
+        validateCEP(data)
+            .then(() => {
+                let data = {
+                    'first_name': document.querySelector('input[name=first_name]').value,
+                    'last_name': document.querySelector('input[name=last_name]').value,
+                    'email': document.querySelector('input[name=email]').value,
+                    'phone': document.querySelector('input[name=phone]').value,
+                    'address': document.querySelector('input[name=address]').value,
+                    'zipcode': document.querySelector('input[name=zipcode]').value,
+                    'cidade': document.querySelector('input[name=cidade]').value,
+                    'hora_entrega': document.querySelector('select[name=hora_entrega]').value,
+                    'data_entrega': document.querySelector('input[name=data_entrega]').value,
+                    'vendedor_nome': document.querySelector('input[name=vendedor_nome]').value,
+                    'telefone_vendedor': document.querySelector('input[name=telefone_vendedor]').value,
+                    'vendedor_email': document.querySelector('input[name=vendedor_email]').value,
+                    'forma_pagamento': document.querySelector('select[name=forma_pagamento]').value,
+                };
+    
+                validateOtherFields(data)
+                    .then(() => {
+                        buy(event);
+                    })
+                    .catch((errors) => {
+                        console.error('Erro ao validar outros campos:', errors);
+                    });
+            })
+            .catch((errors) => {
+                console.error('Erro ao validar CEP:', errors);
+            });
+    }
 
-            if (errors.length) {
-                console.log('Errors', errors)
+    function validateCEP(data) {
+        return new Promise((resolve, reject) => {
+            let errors = [];
+            let url_correios = `validar_cep/${data.zipcode}/`;
+    
+            if (data.zipcode === '') {
+                errors.push('CEP está vazio');
+                reject(errors);
+                displayErrors(errors);
+            } else {
+                fetch(url_correios)
+                    .then(response => response.json())
+                    .then(result => {
+                        if (!result.valido) {
+                            errors.push(result.mensagem);
+                        }
+                        if (errors.length > 0) {
+                            displayErrors(errors);
+                            reject(errors);
+                        } else {
+                            resolve();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao validar CEP:', error);
+                        errors.push('Erro ao validar CEP na base dos correios');
+                        displayErrors(errors);
+                        reject(errors);
+                    });
+            }
+        });
+    }
+    
+    function displayErrors(errors) {
+        let errosDiv = document.querySelector('#erros');
+        errosDiv.style.display = 'block';
+        let html = '<ul>';
+        errors.forEach((error) => {
+            html += '<li>' + error + '</li>';
+        });
+        html += '</ul>';
+        errosDiv.innerHTML = html;
+    }
+    
+    
+    
+
+    function validateOtherFields(data) {
+        return new Promise((resolve, reject) => {
+            let errors = [];
+            let today = new Date();
+            let deliveryDate = new Date(data.data_entrega);
+            let cepRegex = /^[0-9]{5}-?[0-9]{3}$/;
+    
+            if (data.first_name === '') {
+                errors.push('Primeiro nome está vazio');
+            }
+    
+            if (data.last_name === '') {
+                errors.push('Sobrenome está vazio');
+            }
+    
+            if (data.email === '') {
+                errors.push('Email está vazio');
+            }
+    
+            if (data.phone === '') {
+                errors.push('Telefone do cliente está vazio');
+            }
+    
+            if (data.address === '') {
+                errors.push('Endereço está vazio');
+            }
+    
+            if (!cepRegex.test(data.zipcode)) {
+                errors.push('Por favor, insira um CEP válido.');
+            }
+    
+            if (data.cidade === '') {
+                errors.push('Cidade está vazio');
+            }
+    
+            if (data.hora_entrega === '') {
+                errors.push('Hora de entrega está vazio');
+            }
+    
+            if (data.data_entrega === '') {
+                errors.push('Data de entrega está vazio');
+            } else if (deliveryDate < today) {
+                errors.push('A data de entrega deve ser no futuro.');
+            }
+    
+            if (data.vendedor_nome === '') {
+                errors.push('Nome do vendedor está vazio');
+            }
+    
+            if (data.telefone_vendedor === '') {
+                errors.push('Telefone do vendedor está vazio');
+            }
+    
+            if (data.vendedor_email === '') {
+                errors.push('Email do vendedor está vazio');
+            }
+    
+            if (data.forma_pagamento === '') {
+                errors.push('Forma de pagamento está vazio');
+            }
+    
+            // Verifique se há erros
+            if (errors.length > 0) {
+                reject(errors);
+                let errosDiv = document.querySelector('#erros');
                 errosDiv.style.display = 'block';
                 let html = '<ul>';
-                errors.forEach((error) => {
-                    html += '<li>' + error + '</li>';
-                });
+                if (Array.isArray(errors)) { // Verifica se errors é uma matriz
+                    errors.forEach((error) => {
+                        html += '<li>' + error + '</li>';
+                    });
+                } else {
+                    html += '<li>' + errors + '</li>'; // Apenas uma mensagem de erro
+                }
                 html += '</ul>';
                 errosDiv.innerHTML = html;
             } else {
-                errosDiv.style.display = 'none';
-                var stripe = Stripe('{{ pub_key }}')
-
-                fetch('/order/start_order/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}'
-                    },
-                    credentials: 'same-origin',
-                    body: JSON.stringify(data)
-                })
-                .then(function(response) {
-                    return response.json()
-                })
-                .then(function(session) {
-                    return stripe.redirectToCheckout({ sessionId: session.session.id })
-                })
-                .then(function(result) {
-                    if (result.error) {
-                        alert(result.error.message)
-                    }
-                })
-                .catch(function(error) {
-                    console.log('Errors', error)
-                })
+                resolve();
             }
+        });
+    }
+        
 
-            return false
-        } 
-    </script>
+</script>
+
+
 {% endblock %}

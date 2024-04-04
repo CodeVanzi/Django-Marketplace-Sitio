@@ -1,6 +1,6 @@
 from django.urls import path
 
-from cart.views import cart, checkout, hx_menu_cart, update_cart, hx_cart_total, success, remove_all_from_cart
+from cart.views import cart, checkout, hx_menu_cart, update_cart, hx_cart_total, success, remove_all_from_cart, validar_cep
 
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path('hx_menu_cart/', hx_menu_cart, name='hx_menu_cart'),
     path('hx_cart_total/', hx_cart_total, name='hx_cart_total'),
     path('success/', success, name='success'),
+    path('checkout/validar_cep/<str:zipcode>/', validar_cep, name='validar_cep')    
 ]

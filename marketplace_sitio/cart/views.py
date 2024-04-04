@@ -7,7 +7,9 @@ from order.models import Order
 from .cart import Cart
 from django.http import HttpResponse
 
-
+from django.http import JsonResponse
+from core.utils.correios import validar_cep
+import requests
 
 
 
@@ -82,7 +84,30 @@ def cart(request):
 def checkout(request):
     pub_key = settings.STRIPE_API_KEY_PUBLISHABLE
     payment_options = Order.PAYMENT_CHOICES
-    return render(request, 'cart/checkout.html', {'pub_key': pub_key, 'payment_options': payment_options})
+    hora_entrega = Order.HORA_CHOICES
+    
+    context = {
+        'pub_key': pub_key,
+        'payment_options': payment_options,
+        'hora_entrega': hora_entrega,
+    }
+    return render(request, 'cart/checkout.html', context)
+
+
+
+def validar_cep(request, zipcode):
+    cep = zipcode.replace('-', '')
+    url = f'https://viacep.com.br/ws/{cep}/json/'
+
+    try:
+        response = requests.get(url)
+        data = response.json()
+        if not data.get('erro'):
+            return JsonResponse({'valido': True, 'endereco': data})
+        else:
+            return JsonResponse({'valido': False, 'mensagem': 'CEP invalido'})
+    except Exception as e:
+        return JsonResponse({'valido': False, 'mensagem': 'Erro ao consultar o CEP'})
 
 def hx_menu_cart(request):
     cart = Cart(request)

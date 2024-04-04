@@ -24,6 +24,13 @@ class Order(models.Model):
         (boleto,'Boleto'),
     )
 
+    manha = 'Manhã'
+    tarde = 'Tarde'
+    
+    HORA_CHOICES = (
+        (manha,'Manhã'),
+        (tarde,'Tarde'),
+    )
 
     user = models.ForeignKey(User, related_name='orders', blank=True, null=True, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
@@ -33,7 +40,7 @@ class Order(models.Model):
     zipcode = models.CharField(max_length=255)
     cidade = models.CharField(max_length=255)
     phone = models.CharField(max_length=255)
-    hora_entrega = models.CharField(max_length=255)
+    hora_entrega = models.CharField(max_length=255, choices=HORA_CHOICES, default=manha)
     data_entrega = models.DateField()
     vendedor_nome = models.CharField(max_length=255)
     telefone_vendedor = models.CharField(max_length=255)

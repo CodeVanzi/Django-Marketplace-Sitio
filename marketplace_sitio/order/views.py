@@ -50,9 +50,8 @@ def start_order(request):
     zipcode = data['zipcode']
     cidade = data['cidade']
     phone = data['phone']
-    hora_entrega = data['hora_entrega']    
-    # Convertendo a data de entrega para o formato correto
-    data_entrega = datetime.strptime(data['data_entrega'], '%d/%m/%Y').strftime('%Y-%m-%d')    
+    hora_entrega = data['hora_entrega']
+    data_entrega = data['data_entrega']
     vendedor_nome = data['vendedor_nome']
     telefone_vendedor = data['telefone_vendedor']
     vendedor_email = data['vendedor_email']
