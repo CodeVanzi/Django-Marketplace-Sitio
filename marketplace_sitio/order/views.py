@@ -1,11 +1,12 @@
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from datetime import datetime
 from cart.cart import Cart
 from .models import Order, OrderItem
 import json
 import stripe
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 def start_order(request):
     cart = Cart(request)
@@ -89,3 +90,6 @@ def start_order(request):
 
     return JsonResponse({'session': session, 'order': payment_intent})
 
+@login_required
+def myorders(request):
+    return render(request, 'order/myorders.html')

@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Meus pedidos {% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto p-6 ">
+        <h2 class="my-6 uppercase text-xl text-gray-900 dark:text-white">Meus pedidos</h2>
+        <br>
+        <hr>
+        <br>
+
+        {% for order in request.user.orders.all %}
+            <div class="order w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
+                <div class="mb-6 flex justify-between w-full">
+                    <a href="#">Pedido id: {{ order.id }}</a>
+                </div>
+            
+                <div class="mb-6 w-full">
+                    {% for item in order.items.all %}
+                        <div class="product mb-6 flex pr-6 w-full">
+                            <div class="w-1/8 ">
+                                <a href="#" class="w-1/4">
+                                    <img
+                                        src="{{ item.product.get_thumbnail }}"
+                                        class="hover:shadow-lg rounded-xl h-24 w-24 object-cover"
+                                    />
+                                </a>
+                            </div>
+                
+                            <div class="w-7/8 pl-6 w-full">
+                                <div class="flex justify-between">
+                                    <a href="#" class="font-semibold "> {{ item.product.name }}</a>
+                                    <span class="text-gray-600">{{ item.product.price }}</span>
+                                    <span class="text-gray-600">{{ item.quantity }}</span>
+                                    <p class="mb-6 pt-1 text-gray-600">R$ {{ item.price }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-2 w-full">
+                    <strong>Total:</strong> <span class="text-gray-600">R$ {{ order.paid_amount }}</span>
+                    <br>
+                    <strong>Situação do pedido:</strong> <span class="text-emerald-600"> {{ order.status }}</span>
+                    <br>
+                    <strong>Data do pedido:</strong> <span class="text-gray-600">{{ order.created_at }}</span>
+                    <br>
+                    <strong>Forma de pagamento:</strong> <span class="text-gray-600">{{ order.forma_pagamento }}</span>
+                    <br>
+                    <strong>Endereço de entrega:</strong> <span class="text-gray-600">{{order.address}}, {{order.cidade}} </span>
+                    <br>
+                    <strong>Data e hora de entrega:</strong> <span class="text-gray-600">{{order.data_entrega}}, {{order.hora_entrega}} </span>          
+                    <br>
+                    <strong>Vendedor responsável:</strong> <span class="text-gray-600">{{order.vendedor_nome}}, {{order.telefone_vendedor}} </span> 
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}

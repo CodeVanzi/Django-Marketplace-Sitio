@@ -37,7 +37,7 @@
                     <div class="menu-right flex flex-wrap items-center space-x-5">
                         {% if user.is_authenticated %}
                                             <!-- Toggle Dropdown menu authenticated -->
-                        <button type="button" class="flex mr-3 text-lg bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                        <button type="button" class="py-4 text-lg font-semibold text-gray-500 hover:text-emerald-800" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                             <i class="fa-solid fa-user fa-xl" style="color: #919191;"></i>
                         </button>
                                             <!-- Dropdown menu authenticated -->
@@ -51,7 +51,7 @@
                             <a href="{% url 'myaccount' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meu Perfil</a>
                             </li>
                             <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus pedidos</a>
+                            <a href="{% url 'myorders' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus pedidos</a>
                             </li>
                             <li>
                             <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
