@@ -124,6 +124,7 @@ venv.bak/
 mktvenv
 sitiovenv
 nodejsenv
+node\node_modules
 
 # Spyder project settings
 .spyderproject
