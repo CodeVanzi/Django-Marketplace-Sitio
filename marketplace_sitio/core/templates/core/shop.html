@@ -39,11 +39,11 @@
                 {% for category in categories %}
                 <li><a href="{% url 'shop'%}?category={{ category.slug }}" class="block p-2 {% if category.slug == active_category%}text-emerald-600 text-xl{% else %} text-gray-600 {% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">{{category.name}}</a></li>
                 {% endfor %}
-            </ul>
+            </ul>            
         </div>
 
         <!-- Products content -->
-        <div class="products sm:w-4/5">
+        <div class=" mt-3 lg:ml-6 products sm:w-4/5">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 {% for product in products %}
                     {% include 'product/partials/product_list_item.html'%}

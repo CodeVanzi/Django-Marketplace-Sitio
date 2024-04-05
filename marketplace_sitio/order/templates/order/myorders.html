@@ -44,7 +44,7 @@
                     <br>
                     <strong>Situação do pedido:</strong> <span class="text-emerald-600"> {{ order.status }}</span>
                     <br>
-                    <strong>Data do pedido:</strong> <span class="text-gray-600">{{ order.created_at }}</span>
+                    <strong>Data do pedido:</strong> <span class="text-gray-600">{{ order.created_at|date:"d-m-Y" }}</span>
                     <br>
                     <strong>Forma de pagamento:</strong> <span class="text-gray-600">{{ order.forma_pagamento }}</span>
                     <br>
