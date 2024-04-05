@@ -124,7 +124,7 @@ venv.bak/
 mktvenv
 sitiovenv
 nodejsenv
-node\node_modules
+
 
 # Spyder project settings
 .spyderproject
@@ -158,5 +158,10 @@ cython_debug/
 #.idea/
 
 media/
+static/
+node/
+node_modules/
+
+
 *.jpg
 /marketplace_sitio/node/node_modules
