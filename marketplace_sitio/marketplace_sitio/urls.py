@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('cart/', include('cart.urls')),
     path('order/', include('order.urls')),
-    path('admin/', admin.site.urls),
+    path('mestre/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

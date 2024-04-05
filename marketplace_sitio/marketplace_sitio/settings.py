@@ -13,6 +13,19 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+from pathlib import Path
+
+from environ import Env
+env = Env()
+env.read_env()
+ENVIRONMENT = env('ENVIRONMENT', default='production')
+
+
+
+
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
@@ -22,12 +35,17 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gwbn3m!xz-i-%j#d0@@cm3!k6u+stnh@&ij)s*^6_8=#!(c+t-'
+SECRET_KEY = env('SECRET_KEY')
+# ENCRYPT_KEY = env('ENCRYPT_KEY') - not used
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ENVIRONMENT == 'production':
+    DEBUG = False
+    ALLOWED_HOSTS = ['']
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = []
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
@@ -36,8 +54,8 @@ LOGIN_URL = '/login/'
 SESSION_COOKIE_AGE = 86400
 CART_SESSION_ID = 'cart'
 
-STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51O2wxSI4YPElTw2pdTqh7KNTlYmoZquQqchlL70VOiCWxrS9tFufdoSAqokb5XAcuNp7AMHcdEJiHV7dsTkvuErc00ut0KWQTK'
-STRIPE_API_KEY_HIDDEN = 'sk_test_51O2wxSI4YPElTw2p9PChxE7ap4SUkXBYmzE2qsHZMfeSx5yxFqBO0BYAXU9B72VTQJ6k8AEAPHNMU3xv2Yr9vnEE00Heus3xsk'
+STRIPE_API_KEY_PUBLISHABLE = env('STRIPE_API_KEY_PUBLISHABLE')
+STRIPE_API_KEY_HIDDEN = env('STRIPE_API_KEY_HIDDEN')
 STRIPE_SUCCESS_URL = "http://127.0.0.1:8000/cart/success/"
 STRIPE_CANCEL_URL = "http://127.0.0.1:8000/cart/checkout/"
 
@@ -55,6 +73,7 @@ INSTALLED_APPS = [
     'core',
     'product',
     'order',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [

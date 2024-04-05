@@ -8,6 +8,7 @@ import stripe
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
+@login_required
 def start_order(request):
     cart = Cart(request)
     data = json.loads(request.body)
