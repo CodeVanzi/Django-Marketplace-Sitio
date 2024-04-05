@@ -27,7 +27,7 @@ ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') - DECLARADO ABAIXO, CONFIRMAR QUAL A MELHOR FORMA DE USAR, COM O os OU SEM
 
 
 
@@ -41,10 +41,16 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENVIRONMENT == 'production':
     DEBUG = False
-    ALLOWED_HOSTS = ['']
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost:8000']
 else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
+
+INTERNAL_IPS = (
+        '127.0.0.1',
+        'localhost:8000',
+)
+
 
 
 LOGOUT_REDIRECT_URL = '/'
@@ -78,12 +84,14 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'marketplace_sitio.urls'
@@ -155,8 +163,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
