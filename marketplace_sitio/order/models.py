@@ -50,7 +50,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     paid = models.BooleanField(default=False)
-    paid_amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=9999) 
+    paid_amount = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=99) 
     payment_intent = models.CharField(max_length=255, blank=True, null=True)
     quantity = models.IntegerField(default=1)
 
@@ -62,7 +62,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='items', on_delete=models.CASCADE)
-    price = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=9999)
+    price = models.DecimalField(blank=True, null=True, decimal_places=2, max_digits=99)
     quantity = models.IntegerField(default=1)
     
     def get_total_price(self):
