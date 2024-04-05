@@ -50,7 +50,7 @@
                     <br>
                     <strong>Endereço de entrega:</strong> <span class="text-gray-600">{{order.address}}, {{order.cidade}} </span>
                     <br>
-                    <strong>Data e hora de entrega:</strong> <span class="text-gray-600">{{order.data_entrega}}, {{order.hora_entrega}} </span>          
+                    <strong>Data e hora de entrega:</strong> <span class="text-gray-600">{{order.data_entrega|date:"d-m-Y"}}, {{order.hora_entrega}} </span>
                     <br>
                     <strong>Vendedor responsável:</strong> <span class="text-gray-600">{{order.vendedor_nome}}, {{order.telefone_vendedor}} </span> 
                 </div>
