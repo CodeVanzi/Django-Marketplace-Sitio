@@ -159,3 +159,4 @@ cython_debug/
 
 media/
 *.jpg
+/marketplace_sitio/node/node_modules
