@@ -113,7 +113,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'marketplace_sitio\marketplace_sitio\wsgi.py'
+WSGI_APPLICATION = 'marketplace_sitio\wsgi.py'
 
 
 # Database
