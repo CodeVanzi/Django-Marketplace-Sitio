@@ -41,7 +41,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENVIRONMENT == 'production':
     DEBUG = False
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost:8000']
+    ALLOWED_HOSTS = ['*']
 else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
