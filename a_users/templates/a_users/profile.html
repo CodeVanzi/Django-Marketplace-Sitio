@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block head %}
+<style>
+
+    .card li {
+        list-style-type: none;
+        margin-left: 0.5rem;
+        font-size: 0.8rem;
+        color: #666;
+        padding: 0.5rem;
+    }
+
+    .card input {
+        border-radius: 0.5rem;
+        background-color: #d1fae5; /* Você pode ajustar a cor conforme necessário */
+        border: 1px solid #34d399; /* Cor verde escuro */
+        padding: 0.5rem;
+    }
+    
+
+    .card input:focus {
+        
+        border-color: #10b981; 
+        border-width: 2px; 
+    }
+</style>
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div id="profile" class="mt-12 flex flex-col items-center">
+        
+        <div class="max-w-2xl md:w-[36rem] lg:w-[50rem]">
+            <div class="card p-6">
+                <div class="text-center flex flex-col items-center">
+                    <img class="w-36 h-36 rounded-full object-cover mb-4" {% if profile.image %} src={{ profile.image.url }}{%else%}src="https://pbs.twimg.com/profile_images/508601156767997952/fFTdKUf2_400x400.jpeg"{%endif%} />
+                    <div class="text-center max-w-md">
+                        <h1 class="text-2xl uppercase font-bold p-6">{{ profile.nickname }}</h1>
+                        <div class="text-gray-400 mb-4 -mt-3">@{{ profile.user.username }}</div>
+                        <div class="flex items-center justify-center mx-auto">
+                            <img class="object-cover h-6 mr-1 opacity-60" src="https://img.icons8.com/material-outlined/50/000000/marker.png"> 
+                            {{ profile.location}}
+                        </div>
+                        <div class="my-8">
+                            {{ profile.bio }}
+                        </div> 
+                        
+                    </div>
+                </div>
+                <div id="tabs" class="flex justify-center my-4 gap-2" > 
+                    <a class="tab selected">Latest</a>
+                    <a class="tab">Top Posts</a>  
+                    <a class="tab">Top Comments</a>
+                    <a class="tab">Liked Posts</a>
+                </div>
+        
+                <div id="tab-contents" class="max-w-lg flex flex-col items-center">
+                    
+                    <div class="grid place-items-start gap-x-8 max-w-xl mx-auto lg:grid-cols-2 lg:max-w-5xl xl:grid-cols-3 xl:max-w-7xl">
+        
+                    
+        
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+{% endblock %}

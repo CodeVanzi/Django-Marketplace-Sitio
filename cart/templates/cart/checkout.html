@@ -444,7 +444,7 @@
     
             if (data.data_entrega === '') {
                 errors.push('Data de entrega está vazio');
-            } else if (deliveryDate < today) {
+            } else if (deliveryDate <= today) {
                 errors.push('A data de entrega deve ser no futuro.');
             }
     

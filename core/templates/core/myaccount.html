@@ -17,7 +17,7 @@
             <strong>Nome de Usuário:</strong> {{ request.user.username }}<br>
             <strong>E-mail</strong> {{ request.user.email }}<br>
             <a href="{% url 'editmyaccount' %}" class="mt-6 inline-block bg-gray-900 text-white px-3 py-2 rounded-xl bg-emerald-500 text-white hover:bg-emerald-700">Editar dados</a>
-            
+            <a href="{% url 'profile' %}" class="mt-6 inline-block bg-gray-900 text-white px-3 py-2 rounded-xl bg-emerald-500 text-white hover:bg-emerald-700">Dados complementares</a>
         </div>
 
      </div>

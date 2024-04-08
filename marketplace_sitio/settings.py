@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',
     'cloudinary_storage',
     'cloudinary',
+    'a_users',
     'cart',
     'core',
     'product',
