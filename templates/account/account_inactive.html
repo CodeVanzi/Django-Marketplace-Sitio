@@ -1,0 +1,16 @@
+{% extends "allauth/layouts/entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "Account Inactive" %}
+{% endblock head_title %}
+{% block content %}
+<div class="max-w-lg mx-auto flex flex-wrap p-6 text-center">
+    <div class="w-full bg-gray-100 p-6 rounded-xl">
+    {% element h1 %}
+        {% trans "Account Inactive" %}
+    {% endelement %}
+    <p>{% trans "This account is inactive." %}</p>
+    </div>
+</div>
+{% endblock content %}

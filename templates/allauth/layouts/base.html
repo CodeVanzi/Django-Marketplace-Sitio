@@ -1,0 +1,47 @@
+
+{% extends 'core/base.html' %}
+{% block head %}
+<style>
+    form {
+        margin-top: 1.5rem;
+    }
+    form p {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    label, input {
+      display: inline-block;
+      border-radius: 0.5rem;
+    }
+    form p label {
+        width: 7rem;
+        }
+    label {
+        margin: 6px 0 3px;
+        border-radius: 0.5rem;
+    }
+    input, textarea {
+        width: 100%;
+        border-radius: 0.5rem;
+
+    }
+    input[type="file"], select {
+        background-color: white;
+        padding-left: 0;
+    }
+</style>
+{% endblock %}
+
+{% block title %}{% block head_title %}
+{% endblock head_title %}{% endblock %}
+
+
+
+    {% block content %} 
+    {% endblock %}
+
+{% block scripts%}
+{% endblock %}
+
+
