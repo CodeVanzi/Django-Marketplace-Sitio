@@ -159,7 +159,7 @@ cython_debug/
 
 media/
 static/
-node/
+
 node_modules/
 
 
