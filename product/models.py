@@ -21,7 +21,7 @@ class Category(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name='Categoria')
     name = models.CharField(max_length=255, verbose_name='Nome')
-    slug = models.SlugField(max_length=255, verbose_name='Identificador', unique=True)
+    slug = models.SlugField(max_length=255, verbose_name='identificador', unique=True)
     description = models.TextField(max_length=255, verbose_name='Descrição', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Data de criação')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')

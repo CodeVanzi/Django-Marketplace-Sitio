@@ -3,16 +3,18 @@
     class="product rounded-xl mb-6 flex pr-6"
     id="cart-item-{{ item.product.id }}"
 >
-    <a href="{% url 'product' item.product.name %}" class="w-1/4">
+    <a href="{% url 'product' item.product.slug %}" class="w-1/4">
         <img
             src="{{ item.product.get_thumbnail }}"
             class="hover:shadow-lg rounded-xl h-24 w-24 object-cover"
         />
     </a>
+ 
+
     <div class="w-3/4 pl-6">
         <div class="flex justify-between mb-2">
             <h2 class="text-xl font-semibold mb-2">
-                <a href="{% url 'product' item.product.name %}">{{ item.product.name }}</a>
+                <a href="{% url 'product' item.product.slug %}">{{ item.product.name }}</a>
             </h2>
             <p class="text-gray-600 mb-2">{{ item.product.description }}</p>
             <span class="text-gray-600">R$ {{ item.product.price }}</span>
