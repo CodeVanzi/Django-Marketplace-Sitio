@@ -225,7 +225,7 @@ if ENVIRONMENT == 'production' or POSTGRES_LOCALY == True:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     DEFAULT_FROM_EMAIL = f'Sitio Nova Esperança {env("EMAIL_HOST_ADDRESS")}'
-    ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+    ACCOUNT_EMAIL_SUBJECT_PREFIX = 'Sitio Nova Esperança - '
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
