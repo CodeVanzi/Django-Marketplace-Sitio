@@ -4,4 +4,10 @@
 
 {% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}You're receiving this email because user {{ user_display }} has given your email address to register an account on {{ site_domain }}.
 
+<<<<<<< Updated upstream
 To confirm this is correct, go to {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock content %}
+=======
+{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %} Você está recebendo este e-mail porque o usuário {{ user_display }} informou o seu endereço de e-mail para se registrar em uma conta no site {{ site_domain }}.
+
+Para confirmar que isso está correto, vá para {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock content %}
+>>>>>>> Stashed changes
