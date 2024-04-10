@@ -1,13 +1,12 @@
 {% extends "account/email/base_message.txt" %}
 {% load i18n %}
 
-{% block content %}{% autoescape off %}{% blocktrans %}You are receiving this email because you or someone else tried to signup for an
-account using email address:
+{% block content %}{% autoescape off %}{% blocktrans %}Você está recebendo esta mensagem porque outra pessoa tentou se inscrever usando o endereço de email:
 
 {{ email }}
 
-However, an account using that email address already exists.  In case you have
-forgotten about this, please use the password forgotten procedure to recover
-your account:
+No entando, uma conta usando este endereço de email já existe. Caso você tenha esquecido disso, por favor use o procedimento de recuperação de senha para recuperar sua conta:
 
 {{ password_reset_url }}{% endblocktrans %}{% endautoescape %}{% endblock content %}
+
+
