@@ -5,7 +5,8 @@
 >
     <a href="{% url 'product' item.product.slug %}" class="w-1/4">
         <img
-            src="{{ item.product.get_thumbnail }}"
+            {% comment %} src="{{ item.product.get_thumbnail }}" {% endcomment %}
+            src="{{ item.product.image.url }}"
             class="hover:shadow-lg rounded-xl h-24 w-24 object-cover"
         />
     </a>
