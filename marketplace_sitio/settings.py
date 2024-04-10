@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',
     'cloudinary_storage',
     'cloudinary',
+    'django_cleanup.apps.CleanupConfig',    
     'a_users',
     'cart',
     'core',

@@ -1,5 +1,3 @@
-
-
 from django.shortcuts import render, redirect
 from .forms import EditProfileForm
 
@@ -10,12 +8,13 @@ def profile_view(request):
 
 
 def profile_edit(request):
-    profile = request.user.profile
+    form = EditProfileForm(instance=request.user.profile)
+    
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, request.FILES, instance=profile)
+        form = EditProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        
         if form.is_valid():
             form.save()
             return redirect('profile')
-    else:
-        form = EditProfileForm(instance=profile)
-    return render(request, 'a_users/profile_edit.html', {'form': form, 'profile': profile})
+    
+    return render(request, 'a_users/profile_edit.html', {'form': form})
