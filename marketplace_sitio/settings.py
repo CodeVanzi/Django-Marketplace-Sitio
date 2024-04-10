@@ -48,9 +48,10 @@ else:
 INTERNAL_IPS = (
         '127.0.0.1',
         'localhost:8000',
+        'sitionovaesperanca.up.railway.app'
 )
 
-
+CSRF_TRUSTED_ORIGINS = ['https://sitionovaesperanca.up.railway.app']
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
