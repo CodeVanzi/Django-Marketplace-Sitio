@@ -62,8 +62,13 @@ CART_SESSION_ID = 'cart'
 
 STRIPE_API_KEY_PUBLISHABLE = env('STRIPE_API_KEY_PUBLISHABLE')
 STRIPE_API_KEY_HIDDEN = env('STRIPE_API_KEY_HIDDEN')
-STRIPE_SUCCESS_URL = "http://127.0.0.1:8000/cart/success/"
-STRIPE_CANCEL_URL = "http://127.0.0.1:8000/cart/checkout/"
+
+if ENVIRONMENT == 'development':
+    STRIPE_SUCCESS_URL = "http://127.0.0.1:8000/cart/success/"
+    STRIPE_CANCEL_URL = "http://127.0.0.1:8000/cart/checkout/"
+else:
+    STRIPE_SUCCESS_URL = "https://sitionovaesperanca.up.railway.app/cart/success/"
+    STRIPE_CANCEL_URL = "https://sitionovaesperanca.up.railway.app/cart/checkout/"
 
 
 AUTHENTICATION_BACKENDS = [
