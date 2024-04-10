@@ -169,6 +169,7 @@ input[name="remember"] {
     border-left: 5px solid rgb(253, 88, 49);
     margin-bottom: 1rem;
 }
+
 .tab {
     cursor: pointer;
     padding: 0.3rem;
@@ -177,4 +178,59 @@ input[name="remember"] {
 .tab.selected {
     border-bottom: 1px solid grey;
     color: black;
+}
+#id_remember {
+    margin-left: 0.5rem;
+    width: 1rem;
+}
+
+span.helptext {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+.card li {
+    list-style-type: none;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+    padding: 0.5rem;
+}
+
+.card input {
+    border-radius: 0.5rem;
+    background-color: #d1fae5; /* Você pode ajustar a cor conforme necessário */
+    border: 1px solid #34d399; /* Cor verde escuro */
+    padding: 0.5rem;
+}
+
+.card input:focus {
+    
+    border-color: #10b981; 
+    border-width: 2px; 
+}
+
+
+input[type="file"].form-control {
+    /* Define o tamanho do input file */
+    height: 2.8rem; /* Altura do input */
+    width: 100%; /* Ocupa toda a largura disponível */
+    position: relative; /* Para posicionar o botão de seleção */
+
+    /* Remove estilos padrão do botão de seleção de arquivo */
+    padding: 0;
+    margin: 0;
+}
+
+/* Estiliza o botão de seleção de arquivo interno */
+input[type="file"].form-control::-webkit-file-upload-button {
+    /* Define o tamanho do botão */
+    height: 100%; /* Ocupa toda a altura do input */
+    width: 40%; /* Ocupa toda a largura do input */
+    
+    /* Estiliza o botão */
+    background-color: #0e462c; /* Cor de fundo do botão */
+    outline: none; /* Remove a borda ao receber foco */
+    padding: 0; /* Remove o preenchimento interno do botão */
+    margin: 0; /* Remove as margens do botão */
 }
