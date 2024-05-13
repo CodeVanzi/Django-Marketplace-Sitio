@@ -104,6 +104,7 @@ INSTALLED_APPS = [
     'core',
     'product',
     'order',
+    'commodities',
     'admin_honeypot',
 
 ]

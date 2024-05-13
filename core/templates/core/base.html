@@ -71,6 +71,9 @@
                             <a href="{% url 'myorders' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus pedidos</a>
                             </li>
                             <li>
+                            <a href="{% url 'dashboard' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                            </li>
+                            <li>
                             <a href="{% url 'account_logout' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
                             </li>
                             </ul>
@@ -253,6 +256,12 @@ themeToggleBtn.addEventListener('click', function() {
 
         <script src="https://unpkg.com/htmx.org@latest"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.0.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.0.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.0.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-api-3.0.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.0.0.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.0.0.min.js" crossorigin="anonymous"></script>
         {% block scripts %}        
         {% endblock %}
 
