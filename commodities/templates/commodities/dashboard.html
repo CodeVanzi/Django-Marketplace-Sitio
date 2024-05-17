@@ -2,25 +2,41 @@
 
 {% block title %}Dashboard de Commodities {% endblock %}
 
+{% block head %}
+
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.4.1.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.4.1.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.4.1.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.4.1.min.js"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.4.1.min.js"
+        crossorigin="anonymous"></script>
+{% endblock %}
+
 {% block content %}
 <div class="max-w-7xl mx-auto p-6 ">
     <h2 class="my-6 uppercase text-xl text-gray-900 dark:text-white">Commodities</h2>
     <br>
     <hr>
     <br>  
-    <p class="lead"> Preço por ativo    </p>
+    <p > Preço por ativo    </p>
+    <br>
+    <br>
     
+    <div>
     {{ div|safe }}
     {{ script|safe }}
+    </div>
+    <br>
+    <br>
+    <p > parágrafo após o gráfico </p>
 
 </div>
 {% endblock %}
 
 {% block scripts %}  
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.0.0.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.0.0.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.0.0.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-api-3.0.0.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.0.0.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.0.0.min.js" crossorigin="anonymous"></script>
+
 {% endblock %}
