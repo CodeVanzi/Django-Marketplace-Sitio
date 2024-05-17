@@ -158,7 +158,6 @@ cython_debug/
 #.idea/
 
 media/
-static/
 
 node_modules/
 
