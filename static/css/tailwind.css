@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.header-with-background {
+background: url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1900&q=80') no-repeat center center fixed;
+width: 100%;
+height: 33.33vh;
+background-size: cover;
+position: relative;
+z-index: -2;
+}
+
+.header-with-background::before {
+content: "";
+background: rgba(0, 0, 0, 0.7); /* Cor preta com 70% de transparência */
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+}
+
+[x-cloak] { 
+    display: none !important; 
+}
+:root {
+    --primary: rgb(88, 40, 244);
+    --primary-hover: rgb(69, 29, 200);
+    --font1: 'Lobster', sans-serif;
+}
+h1 {
+    font-size: 4rem;
+    line-height: 1.2;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-family: var(--font1);
+}
+h2 {
+    font-size: 1.5rem; 
+    font-weight: bold;
+    line-height: 2rem;
+    margin-bottom: 0.75rem;
+}
+.font1 {
+    font-family: var(--font1);
+}
+.button {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-align: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    padding: 0 1rem;
+    min-height: 3.3rem;
+    font-weight: 600;
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
+    transition-property: transform;
+    transition-duration: .2s;
+    color: white;
+    background-color: var(--primary);
+}
+.button:hover {
+    background-color: var(--primary-hover);
+}
+.button:active {
+    transform: scale(0.95);
+}
+.navitems>li>a {
+    @apply flex items-center gap-2 h-12 px-4 hover:bg-gray-700 rounded-lg;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    background-color: white;
+    padding-bottom: 1rem;
+}
+.hoverlist>* {
+    @apply hover:bg-gray-100 rounded-md transition duration-150;
+}
+.hoverlist>*>a {
+    @apply flex items-center p-2;
+}
+.highlight {
+    @apply !bg-indigo-100;
+}
+.titleBlip {
+    animation: 1s fadeIn;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    10% { opacity: 0; }
+    100% { opacity: 1; }
+}
+form {
+    margin-top: 1.5rem;
+}
+form p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+label, input {
+  display: inline-block;
+}
+form p label {
+    width: 7rem;
+    }
+label {
+    margin: 6px 0 3px;
+}
+input, textarea {
+    width: 100%;
+}
+input[type="file"], select {
+    background-color: white;
+    padding-left: 0;
+}
+label[for="id_remember"] {
+    width: auto;
+    margin-right: 0.5rem;
+}
+input[name="remember"] {
+    width: auto;
+}
+#id_tags{
+    padding-top: 0.5rem;
+}
+#id_tags div {
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+#id_tags div label {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    border: 2px solid rgb(229 231 235);
+    width: auto;
+    cursor: pointer;
+}
+#id_tags div label input {
+    width: auto;
+    margin-right: 5px;
+}
+.textarea, textarea {
+    margin-bottom: 1rem;
+}
+.textarea, textarea, input {
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.2rem;
+    background-color: rgba(232, 240, 254, 1);
+}
+.errorlist li {
+    color: rgb(253, 88, 49);
+    padding: 0.5rem;
+    padding-left: 1rem;
+    border-left: 5px solid rgb(253, 88, 49);
+    margin-bottom: 1rem;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 0.3rem;
+    color: rgb(0,0,0,0.4);
+}
+.tab.selected {
+    border-bottom: 1px solid grey;
+    color: black;
+}
+#id_remember {
+    margin-left: 0.5rem;
+    width: 1rem;
+}
+
+span.helptext {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+.card li {
+    list-style-type: none;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+    padding: 0.5rem;
+}
+
+.card input {
+    border-radius: 0.5rem;
+    background-color: #d1fae5; /* Você pode ajustar a cor conforme necessário */
+    border: 1px solid #34d399; /* Cor verde escuro */
+    padding: 0.5rem;
+}
+
+.card input:focus {
+    
+    border-color: #10b981; 
+    border-width: 2px; 
+}
+
+
+input[type="file"].form-control {
+    /* Define o tamanho do input file */
+    height: 2.8rem; /* Altura do input */
+    width: 100%; /* Ocupa toda a largura disponível */
+    position: relative; /* Para posicionar o botão de seleção */
+
+    /* Remove estilos padrão do botão de seleção de arquivo */
+    padding: 0;
+    margin: 0;
+}
+
+/* Estiliza o botão de seleção de arquivo interno */
+input[type="file"].form-control::-webkit-file-upload-button {
+    /* Define o tamanho do botão */
+    height: 100%; /* Ocupa toda a altura do input */
+    width: 40%; /* Ocupa toda a largura do input */
+    
+    /* Estiliza o botão */
+    background-color: #0e462c; /* Cor de fundo do botão */
+    outline: none; /* Remove a borda ao receber foco */
+    padding: 0; /* Remove o preenchimento interno do botão */
+    margin: 0; /* Remove as margens do botão */
+}

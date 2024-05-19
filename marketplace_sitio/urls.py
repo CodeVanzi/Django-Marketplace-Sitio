@@ -14,5 +14,6 @@ urlpatterns = [
     path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('accounts/', include('allauth.urls')),
     path('profile/', include('a_users.urls')),
+    path('commodities/', include('commodities.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

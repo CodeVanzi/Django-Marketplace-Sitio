@@ -1,7 +1,7 @@
 from django.db import models
-from django.core.files import File
-from PIL import Image
-from io import BytesIO
+# from django.core.files import File
+# from PIL import Image
+# from io import BytesIO
 
 class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name='Nome')
