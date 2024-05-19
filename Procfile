@@ -1,1 +1,1 @@
-web: gunicorn marketplace_sitio.wsgi
+web: gunicorn marketplace_sitio.wsgi:application
