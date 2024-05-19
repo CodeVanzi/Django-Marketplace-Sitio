@@ -24,3 +24,23 @@ class CommoditiesPrices(models.Model):
     def __str__(self):
         return self.ativo
     
+class MediasCommodities(models.Model):
+    ativo = models.CharField(max_length=100)
+    media_ult_ano = models.FloatField()
+    media_ult_sem = models.FloatField()
+    media_ult_tri = models.FloatField()
+    media_ult_mes = models.FloatField()
+    variacao_ano = models.FloatField()
+    variacao_sem = models.FloatField()
+    variacao_tri = models.FloatField()
+    variacao_mes = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Media Movel de Commodities'
+        verbose_name_plural = 'Medias Moveis de Commodities'
+        ordering = ['ativo', 'created_at']
+
+    def __str__(self):
+        return self.ativo

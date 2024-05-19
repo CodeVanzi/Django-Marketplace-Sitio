@@ -70,9 +70,11 @@
                             <li>
                             <a href="{% url 'myorders' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus pedidos</a>
                             </li>
+                            {% if user.is_staff or user.is_superuser %}
                             <li>
                             <a href="{% url 'dashboard' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
                             </li>
+                            {% endif %}
                             <li>
                             <a href="{% url 'account_logout' %}" class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
                             </li>

@@ -1,6 +1,5 @@
 import csv
 from datetime import date
-from itertools import islice
 from django.conf import settings 
 from django.core.management.base import BaseCommand
 from commodities.models import CommoditiesPrices

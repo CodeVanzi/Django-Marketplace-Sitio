@@ -12,4 +12,5 @@ urlpatterns = [
     path('myaccount/edit/', editmyaccount, name='editmyaccount'),
     path('shop/', shop, name='shop'),
     path('product/<slug:slug>/', product, name='product'),
+    
 ]
