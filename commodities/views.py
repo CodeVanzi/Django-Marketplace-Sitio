@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Max, Min
 from commodities.models import CommoditiesPrices
+from django.db.models import Q
 
 from bokeh.models import ColumnDataSource
 from bokeh.embed import components 
@@ -16,7 +17,19 @@ def dashboard(request):
     seen = set()
     ativos = [x for x in ativos if not (x in seen or seen.add(x))]
     active_category = request.GET.get('ativo', '')
+    query = request.GET.get('query','')
     
+    #se tiver query, busca na lista ativos se existe correspondencia parcial, e define active_category com a correspondencia mais proxima
+    if query:
+        busca = [x for x in ativos if query.lower() in x.lower()]
+        if busca:
+            active_category = busca[0]
+        else:
+            active_category = ''
+    
+
+
+
     
     x_values = [1, 2, 3, 4, 5]
     y_values = [6, 7, 2, 3, 6]
