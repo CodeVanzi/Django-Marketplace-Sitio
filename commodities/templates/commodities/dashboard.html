@@ -1,42 +1,55 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
-{% block title %}Dashboard de Commodities {% endblock %}
+{% block title %}Dashboard de Commodities{% endblock %}
 
 {% block head %}
-
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.4.1.min.js"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.4.1.min.js"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.4.1.min.js"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.4.1.min.js"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.4.1.min.js"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="{% static 'htmx.min.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto p-6 ">
-    <h2 class="my-6 uppercase text-xl text-gray-900 dark:text-white">Commodities</h2>
-    <br>
-    <hr>
-    <br>  
-    <p > Preço por ativo    </p>
-    <br>
-    <br>
-    
-    <div>
-    {{ div|safe }}
-    {{ script|safe }}
-    </div>
-    <br>
-    <br>
-    <p > parágrafo após o gráfico </p>
+<div class="max-w-7xl mx-auto py-6 px-6 xl:px-0">
+    <div class="sm:flex sm:justify-between">
+        <!-- Sidebar content -->
+        <div class="sm:hidden w-full mb-6">
+            <h3 class="mb-3 text-xl uppercase font-bold text-gray-900 dark:text-white">Buscar</h3>
+            <form method="get" action=".">
+                <div class="flex">
+                    <input type="text" name="query" placeholder="Buscar" class="w-full rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" />
+                    <button class="p-4 bg-gray-100 border-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
 
+        <div class="filters sm:w-1/5 hidden sm:block">
+            <h3 class="my-6 text-xl uppercase font-bold text-gray-900 dark:text-white">Selecione</h3>
+            <ul class="space-y-2">
+                <li><a href="{% url 'dashboard' %}" class="block p-2 {% if not active_category %}text-emerald-600 text-xl{% else %}text-gray-600{% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">Todos</a></li>
+                {% for ativo in ativos %}
+                <li><a href="{% url 'dashboard' %}?ativo={{ ativo }}" class="block p-2 {% if ativo == active_category %}text-emerald-600 text-xl{% else %}text-gray-600{% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">{{ ativo }}</a></li>
+                {% endfor %}
+            </ul>            
+        </div>
+
+        <!-- Products content -->
+        <div class="mt-3 lg:ml-6 products sm:w-4/5">
+            <div id="graficos">
+                <h2 class="my-6 uppercase text-xl text-gray-900 dark:text-white">Commodities</h2>
+                {% include 'commodities/partials/graf_partials.html' %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
-{% block scripts %}  
-
+{% block scripts %}
 {% endblock %}

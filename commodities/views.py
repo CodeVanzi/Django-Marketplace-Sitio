@@ -12,6 +12,12 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
     # Dados de exemplo
+    ativos = CommoditiesPrices.objects.values_list('ativo', flat=True).distinct()
+    seen = set()
+    ativos = [x for x in ativos if not (x in seen or seen.add(x))]
+    active_category = request.GET.get('ativo', '')
+    
+    
     x_values = [1, 2, 3, 4, 5]
     y_values = [6, 7, 2, 3, 6]
 
@@ -23,6 +29,8 @@ def dashboard(request):
     # Criar figura
     fig = figure(title="Exemplo de Linha", x_axis_label="x", y_axis_label="y", height=500, width=800)
     fig.line(x='x_values', y='y_values', legend_label="Temp.", color="blue", line_width=2, source=source)
+    fig.title.align = 'center'
+    fig.title.text_font_size = '1.5em'
         
     # Layout
     layout = column(fig)
@@ -34,6 +42,9 @@ def dashboard(request):
     context = {
         'script': script,
         'div': div,
+        'ativos': ativos,
+        'active_category': active_category,
     }
-
+    if request.htmx:
+        return render(request, 'commodities/partials/graf_partials.html', context)
     return render(request, 'commodities/dashboard.html', context)
