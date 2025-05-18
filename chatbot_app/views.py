@@ -3,6 +3,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.conf import settings
 import requests
 import json
@@ -11,11 +12,19 @@ import json
 CHATBOT_API_URL = settings.CHATBOT_API_URL
 CHATBOT_API_SHARED_SECRET = getattr(settings, 'CHATBOT_API_SHARED_SECRET', None)
 
+def is_admin(user):
+    return user.is_staff or user.is_superuser
 
-
+@login_required
+@user_passes_test(is_admin)
 def chatbot_interface_view(request):
     return render(request, 'chatbot_app/chat_interface.html')
 
+
+
+
+@login_required
+@user_passes_test(is_admin)
 @csrf_exempt
 def send_chatbot_message_view(request):
     if request.method == 'POST':
