@@ -1,37 +1,127 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% block title %} 🍁 {% endblock %}
+
+{% block title %}Bem-vindo ao Sítio Nova Esperança - Cogumelos Frescos e Gourmet{% endblock %}
+
 {% block head %}
-
-
+<style>
+</style>
 {% endblock %}
 
 {% block content %}
+
 <div class="header-with-background">
-  <header class="relative  w-full h-1/4 py-10 px-6 lg:py-20">
+  <header class="relative w-full h-full py-10 px-6 lg:py-20 flex flex-col justify-center items-center">
     <div class="max-w-3xl mx-auto text-center">
-      <p class="mb-2 text-3xl lg:text-5 text-white font-bold">Sítio Nova Esperança</p>
-      <p class="mb-8 text-white">Explore nosso sítio repleto de alimentos cultivados com paixão e respeito pela natureza. Conheça um mundo de sabores autênticos e nutritivos.</p>
-      
+      <h1 class="mb-4 text-4xl lg:text-6xl text-white font-bold tracking-tight"> 
+        Sítio Nova Esperança: <span class="block sm:inline">Cogumelos Frescos da Natureza para Sua Mesa</span> 
+      </h1>
+      <p class="mb-8 text-lg lg:text-xl text-gray-200"> 
+        Descubra a diferença dos cogumelos cultivados com paixão, respeito pela naturezar e foco na qualidade superior. Do nosso sítio diretamente para você.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="{% url 'shop' %}" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-8 rounded-lg text-lg transition duration-300 ease-in-out transform hover:scale-105">
+          Ver Todos os Produtos
+        </a>
+        <a href="#section-about" class="inline-block bg-transparent hover:bg-white hover:text-emerald-700 text-white font-semibold py-3 px-8 rounded-lg text-lg border-2 border-white transition duration-300 ease-in-out">
+          Conheça Nossa História
+        </a>
+      </div>
     </div>
   </header>
 </div>
 
-
-
-
-
-
-<div class="max-w-6xl mx-auto py-6 px-6 xl:px-0">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-
-      {% for product in products %}
-
-      {% include 'product/partials/product_list_item.html'%}
-
-      {% endfor %}
+<section id="section-differentiators" class="py-12 lg:py-20 bg-green-50 dark:bg-gray-800">
+  <div class="max-w-6xl mx-auto px-6 xl:px-0">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white mb-4">Por que Escolher Nossos Cogumelos?</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">Qualidade, frescor e um toque especial da natureza.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-lg">
+        <div class="text-emerald-500 dark:text-emerald-400 mb-4">
+          <i class="fas fa-leaf fa-3x"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">100% Frescos e Naturais</h3>
+        <p class="text-gray-600 dark:text-gray-400">
+          Colhidos diariamente e cultivados sem agrotóxicos, garantindo o máximo de sabor e nutrientes.
+        </p>
+      </div>
+      <div class="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-lg">
+        <div class="text-emerald-500 dark:text-emerald-400 mb-4">
+          <i class="fas fa-seedling fa-3x"></i> 
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Cultivo Artesanal e Sustentável</h3>
+        <p class="text-gray-600 dark:text-gray-400">
+          Nossas técnicas de cultivo respeitam o meio ambiente e promovem a biodiversidade local.
+        </p>
+      </div>
+      <div class="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-lg">
+        <div class="text-emerald-500 dark:text-emerald-400 mb-4">
+          <i class="fas fa-star fa-3x"></i> 
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Variedade Gourmet e Medicinal</h3>
+        <p class="text-gray-600 dark:text-gray-400">
+          Oferecemos desde os clássicos Shimeji e Paris até especialidades como Juba de Leão e Reishi.
+        </p>
+      </div>
     </div>
   </div>
-  
-{% endblock %}
+</section>
 
+<section id="section-featured-products" class="py-12 lg:py-20 bg-white dark:bg-gray-900">
+  <div class="max-w-6xl mx-auto px-6 xl:px-0">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white mb-4">Nossos Cogumelos Fresquinhos</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300">Descubra sabores incríveis e texturas únicas.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      {% for product in products %}
+        {% include 'product/partials/product_list_item.html'%}
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="{% url 'shop' %}" class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-10 rounded-lg text-lg transition duration-300 ease-in-out transform hover:scale-105">
+        Ver Todos os Nossos Produtos
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="section-about" class="py-12 lg:py-20 bg-green-100 dark:bg-gray-800">
+  <div class="max-w-6xl mx-auto px-6 xl:px-0">
+    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+      <div class="md:w-1/2">
+        <img src="https://images.pexels.com/photos/8179010/pexels-photo-8179010.jpeg" alt="Colheita de cogumelos representando a paixão do Sítio Nova Esperança" class="rounded-lg shadow-xl w-full h-auto object-cover">
+      </div>
+      <div class="md:w-1/2 text-center md:text-left">
+        <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white mb-6">Nossa História, Nossa Paixão</h2>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4">
+          No Sítio Nova Esperança, cada cogumelo é resultado de anos de dedicação e amor pela terra. Somos uma família de produtores comprometida em levar até você alimentos que nutrem o corpo e a alma, cultivados de forma sustentável e com o máximo cuidado.
+        </p>
+        <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+          Acreditamos no poder da natureza e na importância de uma alimentação saudável. Por isso, nossos cogumelos são livres de agrotóxicos e cheios de sabor autêntico.
+        </p>
+        <a href="#" class="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold text-lg">
+          Saiba mais sobre nossa filosofia →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="section-cta" class="py-12 lg:py-20 bg-emerald-700 dark:bg-emerald-800 text-white">
+  <div class="max-w-4xl mx-auto px-6 xl:px-0 text-center">
+    <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 dark:text-white mb-6">Pronto para Saborear a Diferença?</h2>
+    <p class="text-lg lg:text-xl mb-8 text-gray-700 dark:text-gray-300">
+      Faça seu pedido hoje mesmo e receba em casa a qualidade e o frescor dos cogumelos do Sítio Nova Esperança.
+    </p>
+    <a href="{% url 'shop' %}" class="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-12 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+      ~Comprar Agora!~
+    </a>
+  </div>
+</section>
+
+{% endblock %}

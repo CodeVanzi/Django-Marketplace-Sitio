@@ -4,24 +4,15 @@
 
 
 .header-with-background {
-background: url('https://images.pexels.com/photos/28700281/pexels-photo-28700281/free-photo-of-variety-of-fresh-gourmet-mushrooms-on-display.jpeg') no-repeat center center fixed;
+background: url('https://images.pexels.com/photos/31203047/pexels-photo-31203047/free-photo-of-close-up-of-oyster-mushrooms-in-a-basket.jpeg') no-repeat center center fixed;
 width: 100%;
-height: 33.33vh;
+height: 66.66vh;
 background-size: cover;
 position: relative;
-z-index: -2;
+z-index: 0;
 }
 
-.header-with-background::before {
-content: "";
-background: rgba(0, 0, 0, 0.7); /* Cor preta com 70% de transparência */
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: -1;
-}
+
 
 [x-cloak] { 
     display: none !important; 
