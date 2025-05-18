@@ -1,0 +1,217 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Assistente Virtual - Sítio Nova Esperança{% endblock %}
+
+{% block head %}
+{{ block.super }}
+<style>
+    .chat-bubble {
+        max-width: 75%;
+        padding: 10px 15px;
+        border-radius: 18px;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .chat-bubble-user {
+        align-self: flex-end;
+        margin-left: auto;
+    }
+
+    .chat-bubble-bot {
+        align-self: flex-start;
+        margin-right: auto;
+    }
+
+    #chat-messages::-webkit-scrollbar {
+        width: 8px;
+    }
+    #chat-messages::-webkit-scrollbar-thumb {
+        background-color: #a0aec0; /* gray-400 */
+        border-radius: 10px;
+    }
+    #chat-messages::-webkit-scrollbar-track {
+        background-color: #edf2f7; /* gray-200 */
+    }
+    .dark #chat-messages::-webkit-scrollbar-thumb {
+        background-color: #4a5568; /* gray-600 */
+    }
+    .dark #chat-messages::-webkit-scrollbar-track {
+        background-color: #2d3748; /* gray-700 */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto max-w-3xl py-8 px-4">
+    <div class="bg-white dark:bg-gray-900 shadow-2xl rounded-xl overflow-hidden flex flex-col" style="height: 80vh; max-height: 700px;">
+        <div class="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">Assistente Virtual</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400">Seu ajudante especializado em cogumelos!</p>
+        </div>
+
+        <div id="chat-messages" class="flex-grow p-4 sm:p-6 overflow-y-auto flex flex-col space-y-3 bg-gray-100 dark:bg-gray-800">
+            <div id="initial-bot-message" class="chat-bubble chat-bubble-bot">Olá! Sou seu assistente virtual. Posso ajudar com suas dúvidas sobre o cultivo de cogumelos?
+            </div>
+        </div>
+
+        <div class="p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+            <form id="chat-form" class="flex items-center gap-3">
+                <input type="text" id="message-input" placeholder="Digite sua pergunta aqui..." class="flex-grow p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition duration-150" autocomplete="off">
+                <button type="submit" id="send-button" class="bg-emerald-500 hover:bg-emerald-600 text-emerald-800 dark:text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition duration-150 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 text-base">
+                    <i class="fas fa-paper-plane"></i> <span class="hidden sm:inline ml-2">Enviar</span>
+                </button>
+            </form>
+            <div id="chat-error" class="text-red-600 dark:text-red-400 text-sm mt-2"></div>
+            <div id="loading-indicator" class="text-gray-500 dark:text-gray-400 text-sm mt-2 hidden flex items-center">
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Pensando...
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('message-input');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatError = document.getElementById('chat-error');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const sendButton = document.getElementById('send-button');
+        const sendMessageUrl = "{% url 'chatbot_app:send_message_api' %}";
+        const themeToggleButton = document.getElementById('theme-toggle');
+
+        function isDarkMode() {
+            return document.documentElement.classList.contains('dark');
+        }
+
+        function applyBubbleColors(messageDiv, sender) {
+            // Limpa classes de cor e texto existentes para evitar conflitos
+            const colorClassesToRemove = [
+                'bg-emerald-500', 'text-white', 'dark:bg-emerald-500', 'dark:text-white', // User
+                'bg-gray-500', 'text-gray-200', 'dark:bg-gray-700', 'dark:text-gray-200'  // Bot
+            ];
+            messageDiv.classList.remove(...colorClassesToRemove);
+
+            if (sender === 'user') {
+                if (isDarkMode()) {
+                    messageDiv.classList.add('bg-emerald-500', 'text-white'); // Verde mais escuro, texto claro
+                } else {
+                    messageDiv.classList.add('bg-emerald-500', 'text-white'); // Verde suave, texto escuro
+                }
+            } else { // 'bot'
+                if (isDarkMode()) {
+                    messageDiv.classList.add('bg-gray-700', 'text-gray-200'); // Cinza escuro, texto claro (OK)
+                } else {
+                    messageDiv.classList.add('bg-gray-500', 'text-gray-200'); // Cinza claro, texto escuro
+                }
+            }
+        }
+
+        function appendMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-bubble');
+            
+            if (sender === 'user') {
+                messageDiv.classList.add('chat-bubble-user');
+            } else { 
+                messageDiv.classList.add('chat-bubble-bot');
+            }
+            
+            applyBubbleColors(messageDiv, sender);
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function updateAllBubbleColors() {
+            const bubbles = chatMessages.querySelectorAll('.chat-bubble');
+            bubbles.forEach(bubble => {
+                const sender = bubble.classList.contains('chat-bubble-user') ? 'user' : 'bot';
+                applyBubbleColors(bubble, sender);
+            });
+        }
+
+        const themeObserver = new MutationObserver(function(mutationsList, observer) {
+            for(const mutation of mutationsList) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    updateAllBubbleColors();
+                }
+            }
+        });
+        themeObserver.observe(document.documentElement, { attributes: true });
+
+        if (themeToggleButton) {
+            themeToggleButton.addEventListener('click', function() {
+                setTimeout(updateAllBubbleColors, 50);
+            });
+        }
+
+        chatForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const userMessage = messageInput.value.trim();
+            if (!userMessage) return;
+
+            appendMessage(userMessage, 'user');
+            messageInput.value = '';
+            chatError.textContent = '';
+            loadingIndicator.classList.remove('hidden');
+            sendButton.disabled = true;
+
+            try {
+                const response = await fetch(sendMessageUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userMessage })
+                });
+
+                if (!response.ok) {
+                    let errorDetail = response.statusText;
+                    try {
+                        const errorData = await response.json();
+                        errorDetail = errorData.error || errorDetail;
+                    } catch (jsonError) { /* Mantém statusText */ }
+                    console.error('Server error:', response.status, errorDetail);
+                    chatError.textContent = `Erro: ${errorDetail}`;
+                    return;
+                }
+
+                const data = await response.json();
+                if (data.chatbot_answer) {
+                    appendMessage(data.chatbot_answer, 'bot');
+                } else if (data.error) {
+                     chatError.textContent = `Erro: ${data.error}`;
+                }
+
+            } catch (error) {
+                console.error('Fetch error:', error);
+                chatError.textContent = 'Não foi possível conectar ao assistente. Verifique sua conexão e tente novamente.';
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                sendButton.disabled = false;
+                messageInput.focus();
+            }
+        });
+
+        // Aplica as cores corretas na mensagem inicial do bot ao carregar a página
+        const initialBotBubble = document.getElementById('initial-bot-message'); // Adicionado ID para selecionar
+        if (initialBotBubble) {
+            applyBubbleColors(initialBotBubble, 'bot');
+        }
+
+    });
+</script>
+{% endblock %}

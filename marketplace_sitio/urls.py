@@ -15,5 +15,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('profile/', include('a_users.urls')),
     path('commodities/', include('commodities.urls')),
+    path('assistente-virtual/', include('chatbot_app.urls', namespace='chatbot_app')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

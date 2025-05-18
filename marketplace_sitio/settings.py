@@ -12,13 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from environ import Env
-# import os
+import os
 import dj_database_url
 import cloudinary
 
-env = Env()
-env.read_env()
-ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 
 
@@ -28,22 +25,28 @@ ENVIRONMENT = env('ENVIRONMENT', default='production')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = Path(__file__).resolve().parent
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') - DECLARADO ABAIXO, CONFIRMAR QUAL A MELHOR FORMA DE USAR, COM O os OU SEM
-
+env = Env()
+env.read_env()
+Env.read_env(os.path.join(PROJECT_DIR, '.env'))
+ENVIRONMENT = env('ENVIRONMENT', default='production')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 # ENCRYPT_KEY = env('ENCRYPT_KEY') - not used
+CHATBOT_API_URL = env('CHATBOT_API_URL', default="http://127.0.0.1:5001/ask")
+CHATBOT_API_SHARED_SECRET = env('CHATBOT_API_SHARED_SECRET', default=None) # 'default=None' se pode ser opcional
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if ENVIRONMENT == 'production':
-    DEBUG = False
-    ALLOWED_HOSTS = ['*']
-else:
+if ENVIRONMENT == 'development':
     DEBUG = True
     ALLOWED_HOSTS = ['*']
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ['sitionovaesperanca.up.railway.app']
 
 INTERNAL_IPS = (
         '127.0.0.1',
@@ -107,6 +110,7 @@ INSTALLED_APPS = [
     'commodities',
     'admin_honeypot',
     "django_htmx",
+    "chatbot_app",
 
 ]
 

@@ -46,9 +46,9 @@
         </div>
             <h3 class="my-6 text-xl uppercase font-bold text-gray-900 dark:text-white">Commodities</h3>
             <ul class="space-y-2">
-                <li><a href="{% url 'dashboard' %}" class="block p-2 {% if not active_category %}text-emerald-600 text-xl{% else %}text-gray-600{% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">Todos</a></li>
+                <li><a href="{% url 'db_commodities' %}" class="block p-2 {% if not active_category %}text-emerald-600 text-xl{% else %}text-gray-600{% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">Todos</a></li>
                 {% for ativo in ativos %}
-                <li><a href="{% url 'dashboard' %}?ativo={{ ativo }}" class="block p-2 {% if ativo == active_category %}text-emerald-600 text-xl{% else %}text-gray-600{% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">{{ ativo }}</a></li>
+                <li><a href="{% url 'db_commodities' %}?ativo={{ ativo }}" class="block p-2 {% if ativo == active_category %}text-emerald-600 text-xl{% else %}text-gray-600{% endif %} hover:bg-emerald-500 hover:text-white transition duration-300">{{ ativo }}</a></li>
                 {% endfor %}
             </ul>            
         </div>

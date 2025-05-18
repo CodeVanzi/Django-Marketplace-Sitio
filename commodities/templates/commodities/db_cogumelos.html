@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block title %}Dashboard de Análise de Cogumelos{% endblock %}
+
+{% block head %}
+{{ block.super }}
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="{% static 'htmx.min.js' %}" defer></script>
+<style>
+    .bokeh-chart-container { margin-bottom: 1.5rem; padding: 1rem; background-color: white; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); border-radius: 0.5rem; }
+    .dark .bokeh-chart-container { background-color: #1f2937; }
+    .chart-explanation { font-size: 0.875rem; color: #4b5563; margin-top: 0.75rem; line-height: 1.5; }
+    .dark .chart-explanation { color: #9ca3af; }
+    .chart-title { font-size: 1rem; font-weight: 600; color: #111827; margin-bottom: 0.75rem; }
+    .dark .chart-title { color: #f9fafb; }
+    .sidebar-link.active, .sidebar-link[aria-current="page"] { color: #10b981; font-weight: 600; background-color: #ecfdf5;}
+    .dark .sidebar-link.active, .dark .sidebar-link[aria-current="page"] { color: #34d399; background-color: #064e3b;}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto py-6 px-6 xl:px-0">
+    <header class="mb-6">
+        <h1 class="text-2xl lg:text-3xl font-bold leading-tight text-gray-900 dark:text-white">Análise de Preços de Cogumelos Medicinais</h1>
+        <p class="mt-1 text-md text-gray-600 dark:text-gray-400">Preço médio e desvio padrão por espécie e apresentação.</p>
+    </header>
+
+    
+    <div class="sm:flex sm:justify-between lg:space-x-6">
+        <aside class="xl:w-1/4 sm:w-1/5 mb-8 lg:mb-0">
+            <div class="p-4 bg-white dark:bg-gray-800 shadow rounded-lg sticky top-6">
+                <h3 class="mb-4 text-lg font-semibold text-gray-700 dark:text-gray-200 border-b pb-2 dark:border-gray-700">Espécies</h3>
+                <ul class="space-y-1" id="species-filter-list" hx-indicator="#loading-indicator-main">
+                    {% for especie_filter in species_list_sidebar %}
+                    <li>
+                        <a href="?especie={{ especie_filter.slug }}" 
+                           hx-get="{% url 'db_cogumelos' %}?especie={{ especie_filter.slug }}"
+                           hx-target="#dashboard-content-area"
+                           hx-swap="innerHTML"
+                           hx-push-url="true" 
+                           data-species="{{ especie_filter.slug }}" 
+                           class="sidebar-link block p-2 rounded hover:bg-emerald-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 {% if especie_filter.slug == selected_species_slug %}active{% endif %}"
+                           aria-current="{% if especie_filter.slug == selected_species_slug %}page{% endif %}">
+                            {{ especie_filter.nome }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </aside>
+
+        <main class="sm:w-4/5 xl:w-3/4">
+            <div id="loading-indicator-main" class="htmx-indicator text-center py-4">
+                <p class="text-gray-500 dark:text-gray-400">Carregando dados...</p>
+            </div>
+            <div id="dashboard-content-area" 
+                 hx-get="{% url 'db_cogumelos' %}?especie={{ selected_species_slug|default:'all' }}" 
+                 hx-trigger="load" 
+                 hx-swap="innerHTML">
+                
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+document.body.addEventListener('htmx:afterSwap', function(event) {
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    const activeSpeciesSlugFromUrl = currentUrlParams.get('especie') || 'all';
+    const speciesFilterLinks = document.querySelectorAll('#species-filter-list a');
+    
+    speciesFilterLinks.forEach(link => {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+        if (link.dataset.species === activeSpeciesSlugFromUrl) {
+            link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% load dictionary_extras %}
+{% if view_mode == 'all' %}
+<section id="content-all-dynamic">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Visão Geral Comparativa</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Preço Médio - Extrato (R$/ml)</h3>
+            {{ charts.all_preco_medio_extrato_script|safe }}
+            {{ charts.all_preco_medio_extrato_div|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Preço Médio - Cápsulas (R$/mg)</h3>
+            {{ charts.all_preco_medio_capsulas_script|safe }}
+            {{ charts.all_preco_medio_capsulas_div|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Preço Médio - Desidratado (R$/g)</h3>
+            {{ charts.all_preco_medio_desidratado_script|safe }}
+            {{ charts.all_preco_medio_desidratado_div|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Desvio Padrão - Extrato (R$/ml)</h3>
+            {{ charts.all_desvio_padrao_extrato_script|safe }}
+            {{ charts.all_desvio_padrao_extrato_div|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Desvio Padrão - Cápsulas (R$/mg)</h3>
+            {{ charts.all_desvio_padrao_capsulas_script|safe }}
+            {{ charts.all_desvio_padrao_capsulas_div|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Desvio Padrão - Desidratado (R$/g)</h3>
+            {{ charts.all_desvio_padrao_desidratado_script|safe }}
+            {{ charts.all_desvio_padrao_desidratado_div|safe }}
+        </div>
+    </div>
+</section>
+<section class="mt-10">
+     <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Resumo de Preços por Espécie</h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for slug, data_especie in all_species_data_for_tables.items %}
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">{{ data_especie.nome }} - Resumo</h3>
+            <div class="overflow-x-auto">
+                 <table class="min-w-full text-sm">
+                    <thead class="bg-gray-100 dark:bg-gray-700"><tr><th class="px-4 py-2 text-left font-medium text-gray-600 dark:text-gray-300">Apresentação</th><th class="px-4 py-2 text-left font-medium text-gray-600 dark:text-gray-300">Média</th><th class="px-4 py-2 text-left font-medium text-gray-600 dark:text-gray-300">"+1σ"</th><th class="px-4 py-2 text-left font-medium text-gray-600 dark:text-gray-300">"-1σ"</th></tr></thead>
+                    <tbody class="bg-white dark:bg-gray-800">
+                        {% for tipo, valores in data_especie.tabela.items %}
+                        <tr class="{% if not forloop.last %}border-b dark:border-gray-700{% endif %}"><td class="px-4 py-2 font-medium text-gray-800 dark:text-gray-100">{{ tipo }}</td><td class="px-4 py-2 text-gray-700 dark:text-gray-300">{{ valores.media|floatformat:4 }}</td><td class="px-4 py-2 text-gray-700 dark:text-gray-300">{{ valores.mais_1s|floatformat:4 }}</td><td class="px-4 py-2 text-gray-700 dark:text-gray-300">{{ valores.menos_1s|floatformat:4 }}</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+     </div>
+</section>
+{% elif view_mode == 'single' and current_species_data %}
+<section id="content-single-dynamic-{{ selected_species_slug }}">
+    <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">Detalhes: {{ current_species_data.nome }}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Preço Médio - Extrato (R$/ml)</h3>
+            {{ charts|get_item:selected_species_slug|get_item:"preco_medio_extrato_script"|safe }}
+            {{ charts|get_item:selected_species_slug|get_item:"preco_medio_extrato_div"|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Preço Médio - Cápsulas (R$/mg)</h3>
+            {{ charts|get_item:selected_species_slug|get_item:"preco_medio_capsulas_script"|safe }}
+            {{ charts|get_item:selected_species_slug|get_item:"preco_medio_capsulas_div"|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Preço Médio - Desidratado (R$/g)</h3>
+            {{ charts|get_item:selected_species_slug|get_item:"preco_medio_desidratado_script"|safe }}
+            {{ charts|get_item:selected_species_slug|get_item:"preco_medio_desidratado_div"|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Desvio Padrão - Extrato (R$/ml)</h3>
+            {{ charts|get_item:selected_species_slug|get_item:"desvio_padrao_extrato_script"|safe }}
+            {{ charts|get_item:selected_species_slug|get_item:"desvio_padrao_extrato_div"|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Desvio Padrão - Cápsulas (R$/mg)</h3>
+            {{ charts|get_item:selected_species_slug|get_item:"desvio_padrao_capsulas_script"|safe }}
+            {{ charts|get_item:selected_species_slug|get_item:"desvio_padrao_capsulas_div"|safe }}
+        </div>
+        <div class="bokeh-chart-container">
+            <h3 class="chart-title">Desvio Padrão - Desidratado (R$/g)</h3>
+            {{ charts|get_item:selected_species_slug|get_item:"desvio_padrao_desidratado_script"|safe }}
+            {{ charts|get_item:selected_species_slug|get_item:"desvio_padrao_desidratado_div"|safe }}
+        </div>
+    </div>
+    <div class="bokeh-chart-container">
+        <h3 class="chart-title">{{ current_species_data.nome }} - Resumo de Preços</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead class="bg-gray-100 dark:bg-gray-700">
+                    <tr>
+                        <th class="px-4 py-2 text-left font-medium text-gray-600 dark:text-gray-300">Apresentação</th>
+                        <th class="px-4 py-2 text-left font-medium text-gray-600 dark:text-gray-300">Média</th>
+                        <th class="px-4 py-2 text-left font-medium text-gray-600 dark:text-gray-300">"+1σ"</th>
+                        <th class="px-4 py-2 text-left font-medium text-gray-600 dark:text-gray-300">"-1σ"</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-gray-800">
+                    {% for tipo, valores in current_species_data.tabela.items %}
+                    <tr class="{% if not forloop.last %}border-b dark:border-gray-700{% endif %}">
+                        <td class="px-4 py-2 font-medium text-gray-800 dark:text-gray-100">{{ tipo }}</td>
+                        <td class="px-4 py-2 text-gray-700 dark:text-gray-300">{{ valores.media|floatformat:4 }}</td>
+                        <td class="px-4 py-2 text-gray-700 dark:text-gray-300">{{ valores.mais_1s|floatformat:4 }}</td>
+                        <td class="px-4 py-2 text-gray-700 dark:text-gray-300">{{ valores.menos_1s|floatformat:4 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endif %}
