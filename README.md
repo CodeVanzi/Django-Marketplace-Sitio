@@ -164,8 +164,8 @@ Siga os passos abaixo para configurar e rodar o projeto Django localmente. Este 
         DATABASE_URL="sqlite:///db.sqlite3"
 
         # Stripe (Use chaves de TESTE do seu dashboard Stripe)
-        STRIPE_API_KEY_PUBLISHABLE="pk_test_xxxxxxxxxxxxxxxxxxxxxxxx"
-        STRIPE_API_KEY_HIDDEN="sk_test_xxxxxxxxxxxxxxxxxxxxxxxx"
+        STRIPE_API_KEY_PUBLISHABLE=
+        STRIPE_API_KEY_HIDDEN=
 
         # Cloudinary (Opcional para desenvolvimento local, mas necessário se DEFAULT_FILE_STORAGE estiver configurado)
         # CLOUD_NAME="seu_cloud_name"
