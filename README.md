@@ -81,7 +81,7 @@ A plataforma Sítio Nova Esperança oferece um conjunto abrangente de funcionali
 *   **Assistente Virtual (Chatbot):**
     *   Interface de chat integrada à plataforma Django, acessível por administradores e staff.
     *   Projetado para responder perguntas técnicas sobre o cultivo de cogumelos, utilizando como base de conhecimento o documento "Produção de Cogumelos por Meio de Tecnologia Chinesa Modificada" (Embrapa).
-    *   **Arquitetura:** A interface Django consome uma API Flask externa. Esta API Flask implementa a lógica RAG (Retrieval-Augmented Generation) usando LlamaIndex, embeddings locais (`intfloat/multilingual-e5-large`), e o poder de geração de texto da API do Gemini (Google - modelo `gemini-1.5-flash-latest`).
+    *   **Arquitetura:** A interface Django consome uma API Flask externa. Esta API Flask implementa a lógica RAG (Retrieval-Augmented Generation) usando LlamaIndex, embeddings locais (`intfloat/multilingual-e5-large`), e o poder de geração de texto da API do Gemini (Google - modelo `gemini-2.0-flash`).
     *   A comunicação entre Django e a API Flask é protegida por uma chave secreta compartilhada.
 
 ---
@@ -321,7 +321,7 @@ A aplicação Django está configurada para deploy na plataforma Railway. Consid
 O componente chatbot deste projeto Django consome uma API Flask separada. Esta API implementa a lógica RAG:
 *   **LlamaIndex:** Orquestra o pipeline de RAG.
 *   **Embedding:** Utiliza o modelo `intfloat/multilingual-e5-large` (rodando localmente na instância da API Flask) para criar embeddings do documento base (PDF da Embrapa) e das perguntas dos usuários.
-*   **LLM:** As perguntas (com contexto recuperado) são enviadas para a API do Google Gemini (modelo `gemini-1.5-flash-latest`) para geração da resposta.
+*   **LLM:** As perguntas (com contexto recuperado) são enviadas para a API do Google Gemini (modelo `gemini-2.0-flash`) para geração da resposta.
 *   **Segurança:** A comunicação entre a app Django e a API Flask é protegida por uma chave secreta compartilhada (`X-API-Key`).
 
 **Opções de Execução da API Flask do Chatbot:**
